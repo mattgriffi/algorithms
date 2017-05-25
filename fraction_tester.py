@@ -59,7 +59,9 @@ class TestFractionMethods(unittest.TestCase):
         self.assertTrue(F(0, 5) == F(0, 3))
 
     def test_reduce(self):
-        pass
+        frac1 = F(6, 8)
+        frac1.reduced()
+        self.assertTrue(frac1 == F(3, 4))
 
 if __name__ == "__main__":
     unittest.main()
