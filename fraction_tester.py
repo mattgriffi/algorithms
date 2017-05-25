@@ -7,18 +7,15 @@ from fraction import Fraction
 class TestFractionMethods(unittest.TestCase):
 
     def setUp(self):
-        self.nums = [random.randint(0, 999) for _ in range(1000)]
-        self.denoms = [random.randint(1, 999) for _ in range(1000)]
+        self.nums = [random.randint(0, 999) for _ in range(10000)]
+        self.denoms = [random.randint(1, 999) for _ in range(10000)]
         self.pairs = zip(self.nums, self.denoms)
 
-
     def test_str(self):
-        """Test the __str__ method"""
         for n, d in self.pairs:
             frac = Fraction(n, d)
             correct = str(n) + "/" + str(d)
             self.assertEqual(str(frac), correct)
-
 
     def test_float(self):
         for n, d in self.pairs:
@@ -26,7 +23,6 @@ class TestFractionMethods(unittest.TestCase):
             frac_float = float(frac)
             correct = n / d
             self.assertAlmostEqual(frac_float, correct, places=10)
-
 
     def test_add(self):
         for n, d in self.pairs:
@@ -37,3 +33,18 @@ class TestFractionMethods(unittest.TestCase):
             frac2 = Fraction(num_add, den_add)
             result = frac1 + frac2
             self.assertAlmostEqual(float(result), correct, places=10)
+
+    def test_int(self):
+        for n, d in self.pairs:
+            frac = Fraction(n, d)
+            frac_int = int(frac)
+            correct = n // d
+            self.assertEqual(frac_int, correct)
+
+    def test_bool(self):
+        for n, d in self.pairs:
+            frac = Fraction(n, d)
+            self.assertTrue(bool(n) == bool(frac))
+
+if __name__ == "__main__":
+    unittest.main()
