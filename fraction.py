@@ -25,8 +25,7 @@ class Fraction:
     def __add__(self, other):
         new_num = self.num * other.den + self.den * other.num
         new_den = self.den * other.den
-        result = Fraction(new_num, new_den)
-        return result.reduced()
+        return Fraction(new_num, new_den).reduced()
 
     def __eq__(self, other):
         """Checks equality; reduces both fractions first"""
@@ -39,16 +38,17 @@ class Fraction:
 
     def reduced(self):
         """Returns new fraction, equal to this one reduced to lowest terms"""
-        gcd = self.gcd(self.num, self.den)
-        return Fraction(self.num / gcd, self.den / gcd)
+        gcd = self.get_gcd(self.num, self.den)
+        return Fraction(self.num // gcd, self.den // gcd)
 
     def reduce(self):
         """Reduces fraction to lowest terms in place"""
-        gcd = self.gcd(self.num, self.den)
-        self.num /= gcd
-        self.den /= gcd
+        gcd = self.get_gcd(self.num, self.den)
+        self.num //= gcd
+        self.den //= gcd
 
-    def gcd(self, m, n):
+    @staticmethod
+    def get_gcd(m, n):
         """Use Euclid's Algorithm to find the
         greatest common divisor of m and n"""
         while m % n:
