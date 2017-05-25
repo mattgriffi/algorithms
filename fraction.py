@@ -3,6 +3,10 @@
 class Fraction:
 
     def __init__(self, numerator, denominator):
+        if type(numerator) is not int or type(denominator) is not int:
+            raise TypeError("numerator and denominator must be type 'int'")
+        if denominator == 0:
+            raise ZeroDivisionError
         self.num = numerator
         self.den = denominator
 
@@ -21,11 +25,12 @@ class Fraction:
     def __add__(self, other):
         new_num = self.num * other.den + self.den * other.num
         new_den = self.den * other.den
-        return Fraction(new_num, new_den)
+        result = Fraction(new_num, new_den)
+        return result.reduced()
 
     def __eq__(self, other):
         """Checks equality; reduces both fractions first"""
-        if type(other) != type(self):
+        if type(other) is not type(self):
             return False
         other = other.reduced()
         this = self.reduced()
@@ -37,8 +42,15 @@ class Fraction:
         gcd = self.gcd(self.num, self.den)
         return Fraction(self.num / gcd, self.den / gcd)
 
+    def reduce(self):
+        """Reduces fraction to lowest terms in place"""
+        gcd = self.gcd(self.num, self.den)
+        self.num /= gcd
+        self.den /= gcd
+
     def gcd(self, m, n):
-        """Using Euclid's Algorithm to find the GCD of m and n"""
+        """Use Euclid's Algorithm to find the
+        greatest common divisor of m and n"""
         while m % n:
             old_m, old_n = m, n
             m, n = old_n, old_m % old_n
