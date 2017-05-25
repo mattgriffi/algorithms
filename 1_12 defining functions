@@ -1,5 +1,5 @@
 # This program attempts to produce a short target sentence by randomly generating strings
-# and checking them against the target.
+# and checking them against the target. Time required is 27^n
 
 import random
 import string
