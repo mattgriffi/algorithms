@@ -32,6 +32,7 @@ class TestFractionMethods(unittest.TestCase):
             frac1 = F(n, d)
             frac2 = F(num_add, den_add)
             result = frac1 + frac2
+            self.assertTrue(result.is_reduced())
             self.assertAlmostEqual(float(result), correct, places=10)
 
     def test_int(self):

@@ -1,14 +1,15 @@
 # This class implements a representation of decimal fractions.
 
 class Fraction:
-
     def __init__(self, numerator, denominator):
         if type(numerator) is not int or type(denominator) is not int:
             raise TypeError("numerator and denominator must be type 'int'")
         if denominator == 0:
             raise ZeroDivisionError
         self.num = numerator
-        self.den = denominator
+        self.den = abs(denominator)
+        if denominator < 0:
+            self.num *= -1
 
     def __str__(self):
         return "{}/{}".format(self.num, self.den)
@@ -33,8 +34,8 @@ class Fraction:
             return False
         other = other.reduced()
         this = self.reduced()
-        return  this.num == other.num == 0 or \
-                (this.num == other.num and this.den == other.den)
+        return this.num == other.num == 0 or \
+            (this.num == other.num and this.den == other.den)
 
     def reduced(self):
         """Returns new fraction, equal to this one reduced to lowest terms"""
