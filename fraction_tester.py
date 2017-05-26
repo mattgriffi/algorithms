@@ -1,7 +1,8 @@
 # This class tests all method of the Fraction class
 
-import unittest
 import random
+import unittest
+
 from fraction import Fraction as F
 
 
