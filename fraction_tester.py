@@ -11,12 +11,6 @@ class TestFractionMethods(unittest.TestCase):
         self.denoms = [random.randint(1, 999) for _ in range(10000)]
         self.pairs = zip(self.nums, self.denoms)
 
-    def test_str(self):
-        for n, d in self.pairs:
-            frac = F(n, d)
-            correct = str(n) + "/" + str(d)
-            self.assertEqual(str(frac), correct)
-
     def test_float(self):
         for n, d in self.pairs:
             frac = F(n, d)
@@ -65,10 +59,8 @@ class TestFractionMethods(unittest.TestCase):
         self.assertTrue(frac1 == F(3, 4))
 
     def test_is_reduced(self):
-        frac1 = F(6, 8)
         frac2 = F(2, 3)
         frac3 = F(0, 5)
-        self.assertFalse(frac1.is_reduced())
         self.assertTrue(frac2.is_reduced())
         self.assertTrue(frac3.is_reduced())
 

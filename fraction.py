@@ -11,6 +11,8 @@ class Fraction:
         if denominator < 0:
             self.num *= -1
 
+        self.reduce()
+
     def __str__(self):
         return "{}/{}".format(self.num, self.den)
 
@@ -26,7 +28,7 @@ class Fraction:
     def __add__(self, other):
         new_num = self.num * other.den + self.den * other.num
         new_den = self.den * other.den
-        return Fraction(new_num, new_den).reduced()
+        return Fraction(new_num, new_den)
 
     def __eq__(self, other):
         """Checks equality; reduces both fractions first"""
@@ -36,6 +38,12 @@ class Fraction:
         this = self.reduced()
         return this.num == other.num == 0 or \
             (this.num == other.num and this.den == other.den)
+
+    def get_num(self):
+        return self.num
+
+    def get_den(self):
+        return self.den
 
     def reduced(self):
         """Returns new fraction, equal to this one reduced to lowest terms"""
