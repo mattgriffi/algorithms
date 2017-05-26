@@ -63,5 +63,13 @@ class TestFractionMethods(unittest.TestCase):
         frac1.reduced()
         self.assertTrue(frac1 == F(3, 4))
 
+    def test_is_reduced(self):
+        frac1 = F(6, 8)
+        frac2 = F(2, 3)
+        frac3 = F(0, 5)
+        self.assertFalse(frac1.is_reduced())
+        self.assertTrue(frac2.is_reduced())
+        self.assertTrue(frac3.is_reduced())
+
 if __name__ == "__main__":
     unittest.main()

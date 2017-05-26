@@ -47,6 +47,10 @@ class Fraction:
         self.num //= gcd
         self.den //= gcd
 
+    def is_reduced(self):
+        return self.num == 0 or \
+               self.get_gcd(self.num, self.den) == 1
+
     @staticmethod
     def get_gcd(m, n):
         """Use Euclid's Algorithm to find the
