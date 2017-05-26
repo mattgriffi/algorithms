@@ -38,7 +38,7 @@ def profiling(func):
 def concat(n):
     l = []
     for i in range(n):
-        l += [n]
+        l += [i]
 
 
 @profiling
