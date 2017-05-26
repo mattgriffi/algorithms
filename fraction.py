@@ -1,5 +1,6 @@
 # This class implements a representation of decimal fractions.
 
+
 class Fraction:
     def __init__(self, numerator, denominator):
         if type(numerator) is not int or type(denominator) is not int:
