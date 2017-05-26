@@ -4,6 +4,7 @@ import unittest
 import random
 from fraction import Fraction as F
 
+
 class TestFractionMethods(unittest.TestCase):
 
     def setUp(self):
@@ -63,6 +64,7 @@ class TestFractionMethods(unittest.TestCase):
         frac3 = F(0, 5)
         self.assertTrue(frac2.is_reduced())
         self.assertTrue(frac3.is_reduced())
+
 
 if __name__ == "__main__":
     unittest.main()
