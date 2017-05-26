@@ -1,14 +1,20 @@
 """This program detects whether the given string is an anagram of another given string"""
 
 
+import time
+
+
 def main():
-    print(anagram_solver("abc", "cba"))
-    print(anagram_solver("level", "velel"))
-    print(anagram_solver("dog", "cat"))
-    print(anagram_solver("god", "dog"))
+    a = "klahsfdkljhasfpiouweafoihdsfa;jskl;sfjapoweiuaypofsafhsjkfhskjfnasfhjpwiureasf"*50
+    b = "".join(sorted(a))
+    result_format = "Correct answer: {}\nDerived answer: {}\nTime taken: {:.15f}\n"
+    print(result_format.format(True, *anagram_solver("level", "velel")))
+    print(result_format.format(False, *anagram_solver("dog", "cat")))
+    print(result_format.format(True, *anagram_solver(a, b)))
 
 
 def anagram_solver(a, b):
+    start = time.time()
     c = list(b)
     # Iterate over string a
     for ca in a:
@@ -20,8 +26,12 @@ def anagram_solver(a, b):
                 found = True
                 break
         if not found:
-            return False
-    return True
+            return False, time.time() - start
+    return True, time.time() - start
+
+
+def better_solver(a, b):
+    pass
 
 
 if __name__ == "__main__":
