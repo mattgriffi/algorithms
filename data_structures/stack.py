@@ -1,4 +1,8 @@
-"""This class implements a LIFO Stack with the usual methods"""
+"""This class implements a LIFO Stack with the usual methods.
+Does not do any error handling.
+
+All operations in this stack are constant time.
+"""
 
 
 class Stack:
