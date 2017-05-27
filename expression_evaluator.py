@@ -10,9 +10,7 @@ from operators import Operators
 
 
 def main():
-    exp = "( 2 + 3 + 12 ) * 3"
-    postfix = ExpressionEvaluator.infix_to_postfix(exp)
-    print(ExpressionEvaluator.eval_postfix(postfix))
+    pass
 
 
 class ExpressionEvaluator:
