@@ -17,14 +17,20 @@ class Operators:
 
     @staticmethod
     def div(a, b):
+        if b == 0:
+            raise ZeroDivisionError
         return a // b
 
     @staticmethod
     def div_true(a, b):
+        if b == 0:
+            raise ZeroDivisionError
         return a / b
 
     @staticmethod
     def mod(a, b):
+        if b == 0:
+            raise ZeroDivisionError
         return a % b
 
     @staticmethod
