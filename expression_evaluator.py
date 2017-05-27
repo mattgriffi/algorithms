@@ -24,7 +24,7 @@ class ExpressionEvaluator:
         Example:
         A * B + C * D  ->  A B * C D * +
         """
-        precedence = {'(': 0, '+': 1, '-': 1, '*': 2, '/': 2, '%': 2}
+        precedence = {'(': 0, '+': 1, '-': 1, '*': 2, '/': 2, '//': 2, '%': 2, '**': 3}
         exp = exp.split()
         result = []
         opstack = Stack()
@@ -61,8 +61,9 @@ class ExpressionEvaluator:
     def eval_postfix(exp):
         """Evaluates an expression in postfix order."""
         operators = {'+': Operators.add, '-': Operators.sub,
-                     '*': Operators.mul, '/': Operators.div,
-                     '%': Operators.mod}
+                     '*': Operators.mul, '/': Operators.div_true,
+                     '//': Operators.div, '%': Operators.mod,
+                     '**': Operators.exp}
         exp = exp.split()
         exp_stack = Stack()
         for e in exp:
@@ -73,7 +74,7 @@ class ExpressionEvaluator:
             # and pass in the two most recent operands from the stack.
             # Push the result back onto the stack
             else:
-                result = operators[e](int(exp_stack.pop()), int(exp_stack.pop()))
+                result = operators[e](float(exp_stack.pop()), float(exp_stack.pop()))
                 exp_stack.push(result)
 
         # The last thing left on the stack is the final answer
