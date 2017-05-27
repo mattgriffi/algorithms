@@ -1,11 +1,7 @@
 """This program evaluates a given mathematical expression.
 The expression should be in either normal, infix order, or
-in postfix order. All operands, operators, and parenthesis
+in postfix order. All operands, operators, and parentheses
 should be space-separated.
-
-Examples:
-    Infix: ( A + B ) * C
-    Postfix: A B + C *
 """
 
 
@@ -61,6 +57,7 @@ class ExpressionEvaluator:
 
         return ' '.join(result)
 
+    @staticmethod
     def eval_postfix(exp):
         """Evaluates an expression in postfix order."""
         operators = {'+': Operators.add, '-': Operators.sub,
@@ -80,6 +77,13 @@ class ExpressionEvaluator:
 
         # The last thing left on the stack is the final answer
         return exp_stack.pop()
+
+    @staticmethod
+    def eval_infix(exp):
+        """Evaluates an expression in infix order."""
+        postfix = ExpressionEvaluator.infix_to_postfix(exp)
+        result = ExpressionEvaluator.eval_postfix(postfix)
+        return result
 
 
 if __name__ == "__main__":
