@@ -74,7 +74,8 @@ class ExpressionEvaluator:
             # and pass in the two most recent operands from the stack.
             # Push the result back onto the stack
             else:
-                result = operators[e](float(exp_stack.pop()), float(exp_stack.pop()))
+                b, a = exp_stack.pop(), exp_stack.pop()
+                result = operators[e](float(a), float(b))
                 exp_stack.push(result)
 
         # The last thing left on the stack is the final answer
