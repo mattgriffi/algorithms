@@ -18,19 +18,19 @@ class Operators:
     @staticmethod
     def div(a, b):
         if b == 0:
-            raise ZeroDivisionError("integer division by zero")
+            raise ZeroDivisionError("integer division by zero ({} // {})".format(a, b))
         return a // b
 
     @staticmethod
     def div_true(a, b):
         if b == 0:
-            raise ZeroDivisionError("division by zero")
+            raise ZeroDivisionError("division by zero ({} / {})".format(a, b))
         return a / b
 
     @staticmethod
     def mod(a, b):
         if b == 0:
-            raise ZeroDivisionError("modulo by zero")
+            raise ZeroDivisionError("modulo by zero ({} % {})".format(a, b))
         return a % b
 
     @staticmethod
