@@ -20,5 +20,13 @@ class Operators:
         return a // b
 
     @staticmethod
+    def div_true(a, b):
+        return a / b
+
+    @staticmethod
     def mod(a, b):
         return a % b
+
+    @staticmethod
+    def exp(a, b):
+        return a ** b
