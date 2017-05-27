@@ -14,14 +14,12 @@ from operators import Operators
 
 
 def main():
-    exp = "( A + B + C ) * D"
-    print(ExpressionEvaluator.infix_to_postfix(exp))
+    exp = "( 2 + 3 + 12 ) * 3"
+    postfix = ExpressionEvaluator.infix_to_postfix(exp)
+    print(ExpressionEvaluator.eval_postfix(postfix))
 
 
 class ExpressionEvaluator:
-
-    operators = {'+': Operators.add, '-': Operators.sub,
-                 '*': Operators.mul, '/': Operators.div}
 
     @staticmethod
     def infix_to_postfix(exp):
@@ -62,6 +60,26 @@ class ExpressionEvaluator:
             result.append(opstack.pop())
 
         return ' '.join(result)
+
+    def eval_postfix(exp):
+        """Evaluates an expression in postfix order."""
+        operators = {'+': Operators.add, '-': Operators.sub,
+                     '*': Operators.mul, '/': Operators.div}
+        exp = exp.split()
+        exp_stack = Stack()
+        for e in exp:
+            # If e is an operand, push to stack
+            if e not in operators:
+                exp_stack.push(e)
+            # If e is an operator, get operator method from dictionary
+            # and pass in the two most recent operands from the stack.
+            # Push the result back onto the stack
+            else:
+                result = operators[e](int(exp_stack.pop()), int(exp_stack.pop()))
+                exp_stack.push(result)
+
+        # The last thing left on the stack is the final answer
+        return exp_stack.pop()
 
 
 if __name__ == "__main__":
