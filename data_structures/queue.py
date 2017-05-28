@@ -15,6 +15,8 @@ class Queue:
 
     def dequeue(self):
         """Returns element at the front of the queue and removes it from the queue."""
+        if self.qsize == 0:
+            raise QueueException("cannot dequeue from empty queue")
         e = self.q[self.front]
         self.front += 1
         self.qsize -= 1
@@ -27,3 +29,7 @@ class Queue:
     def size(self):
         """Returns the number of elements currently in the queue."""
         return self.qsize
+
+
+class QueueException(Exception):
+    pass

@@ -3,7 +3,7 @@
 import random
 import unittest
 
-from data_structures.queue import Queue
+from data_structures.queue import Queue, QueueException
 
 
 class QueueTester(unittest.TestCase):
@@ -40,6 +40,8 @@ class QueueTester(unittest.TestCase):
                     self.assertEqual(self.sim.pop(0), self.q.dequeue())
                 else:
                     self.assertTrue(self.q.isEmpty())
+                    with self.assertRaises(QueueException):
+                        self.q.dequeue()
 
 
 if __name__ == "__main__":
