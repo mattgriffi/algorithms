@@ -1,5 +1,5 @@
 """This program uses a Queue to simulate the children's game of hot potato. The name at the
-front of the list represents the child who is currently holding the potato. """
+front of the queue represents the child who is currently holding the potato. """
 
 
 from data_structures.queue import Queue
