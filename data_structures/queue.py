@@ -1,4 +1,6 @@
-"""This class defines a FIFO queue."""
+"""This class defines a FIFO queue. It achieves constant time enqueue and dequeue
+operations. However, this comes at the cost of space and occasional wasted time to trim the
+fat. """
 
 
 class Queue:
@@ -12,6 +14,10 @@ class Queue:
         """Adds item to the end of the queue."""
         self.q.append(item)
         self.qsize += 1
+        # If the list has gotten significantly longer than it needs to be, cut off the excess
+        if len(self.q) > self.qsize * 20:
+            self.q = self.q[self.front:]
+            self.front = 0
 
     def dequeue(self):
         """Returns element at the front of the queue and removes it from the queue."""
