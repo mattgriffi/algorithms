@@ -35,10 +35,9 @@ class QueueTester(unittest.TestCase):
                     e = random.randint(-1000000, 1000000)
                     self.q.enqueue(e)
                     self.sim.append(e)
-                elif not len(self.sim):
+                elif len(self.sim):
                     self.assertFalse(self.q.isEmpty())
                     self.assertEqual(self.sim.pop(0), self.q.dequeue())
-
 
 
 if __name__ == "__main__":
