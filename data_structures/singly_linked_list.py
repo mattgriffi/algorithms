@@ -108,13 +108,14 @@ class SinglyLinkedList:
 
         temp = Node(item)
 
-        if pos == 0:
+        if self.head is None:
+            self.head = temp
+        elif pos == 0:
+            temp.next = self.head
             self.head = temp
         else:
             cursor = self.head
-            prev = cursor
-            for i in range(pos - 2):
-                prev = cursor
+            for i in range(pos - 1):
                 cursor = cursor.next
             temp.next = cursor.next
             cursor.next = temp
