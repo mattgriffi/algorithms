@@ -12,7 +12,7 @@ class PalindromeChecker:
         deque = Deque()
         for c in s:
             deque.addRear(c)
-        while not deque.isEmpty():
+        while deque.size() > 1:
             if deque.removeFront() != deque.removeRear():
                 return False
         return True
