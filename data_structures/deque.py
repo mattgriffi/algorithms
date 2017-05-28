@@ -4,34 +4,34 @@ O(1), while adding and removing from the front are O(n)."""
 
 class Deque:
     def __init__(self):
-        self.q = []
+        self.items = []
 
     def addFront(self, item):
         """Adds item to the front of the deque."""
-        self.q.insert(0, item)
+        self.items.insert(0, item)
 
     def addRear(self, item):
         """Adds item to the rear of the deque."""
-        self.q.append(item)
+        self.items.append(item)
 
     def removeFront(self):
         """Returns element at the front of the deque and removes it."""
-        if len(self.q) == 0:
+        if len(self.items) == 0:
             raise DequeException("cannot remove from empty deque")
-        return self.q.pop(0)
+        return self.items.pop(0)
 
     def removeRear(self):
         """Returns element at the rear of the deque and removes it."""
-        if len(self.q) == 0:
+        if len(self.items) == 0:
             raise DequeException("cannot remove from empty deque")
-        return self.q.pop()
+        return self.items.pop()
 
     def isEmpty(self):
         """Returns True if deque is empty, else False."""
-        return len(self.q) == 0
+        return len(self.items) == 0
 
     def size(self):
-        return len(self.q)
+        return len(self.items)
 
 
 class DequeException(Exception):
