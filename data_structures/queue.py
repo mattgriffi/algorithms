@@ -1,6 +1,7 @@
-"""This class defines a FIFO queue. It achieves constant time enqueue and dequeue
-operations. However, this comes at the cost of space and occasional wasted time to trim the
-fat. """
+"""This class defines a FIFO queue. It achieves constant time enqueue and dequeue operations
+using a built-in list. However, this comes at the cost of space and occasional wasted time
+to trim the fat. This trade-off could be avoided by using a more appropriate data structure,
+such as a doubly linked list. """
 
 
 class Queue:
