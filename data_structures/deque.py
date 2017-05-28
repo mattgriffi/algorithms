@@ -1,5 +1,6 @@
 """This class implements a deque with the usual methods. Adding and removing from the rear are
-O(1), while adding and removing from the front are O(n)."""
+O(1), while adding and removing from the front are O(n). Getting both sides to O(1) would
+require a doubly linked list, or a fixed-size array."""
 
 
 class Deque:
