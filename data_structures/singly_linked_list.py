@@ -7,12 +7,14 @@ class SinglyLinkedList:
         self.length = 0
 
     def add(self, item):
+
         if self.head is None:
             self.head = Node(item)
         else:
             temp = Node(item)
             temp.next = self.head
             self.head = temp
+
         self.length += 1
 
     def remove(self, item):
@@ -68,8 +70,37 @@ class SinglyLinkedList:
 
     def pop(self, pos=-1):
         """Returns item at given pos, and removes it from the list. Will return and remove
-        the last item in the list by default."""
+        the last item in the list by default. pos must be non-negative. Raises ListException
+        if list is empty or if pos is greater than current list size."""
 
+        if self.head is None:
+            raise ListException("cannot pop from empty list")
+        if pos < -1:
+            raise ListException("pos must be non-negative")
+        if pos > self.length - 1:
+            raise ListException("list index out of range")
+
+        # Pop end of list by default
+        if pos == -1:
+            pos = self.length - 1
+
+        # Popping head
+        if pos == 0:
+            data = self.head.data
+            self.head = self.head.next
+            self.length -= 1
+            return data
+        # Popping something other than head
+        else:
+            cursor = self.head
+            prev = cursor
+            for i in range(pos):
+                prev = cursor
+                cursor = cursor.next
+
+            prev.next = cursor.next
+            self.length -= 1
+            return cursor.data
 
 class Node:
     def __init__(self, data):
