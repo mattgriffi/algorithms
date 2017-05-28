@@ -61,6 +61,8 @@ class SinglyLinkedListTester(unittest.TestCase):
     def test_append(self):
         self.li.append(1)
         self.li.append(2)
+        self.li.append(3)
+        self.assertEqual(3, self.li.pop())
         self.assertEqual(2, self.li.pop())
         self.assertEqual(1, self.li.pop())
 
@@ -82,8 +84,19 @@ class SinglyLinkedListTester(unittest.TestCase):
         for e in sim:
             self.assertEqual(sim.index(e), self.li.index(e))
 
-    def test_all(self):
-        pass
+    def test_insert(self):
+        for i in range(5):
+            self.li.append(i)
+
+        self.li.insert(0, 20)
+        self.li.insert(2, 21)
+        self.li.insert(6, 22)
+        self.assertEqual(0, self.li.index(20))
+        self.assertEqual(1, self.li.index(0))
+        self.assertEqual(2, self.li.index(21))
+        self.assertEqual(6, self.li.index(22))
+        self.li.insert(4, 23)
+        self.assertEqual(8, self.li.index(4))
 
     def test_fuzz(self):
         pass
