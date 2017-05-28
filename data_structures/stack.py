@@ -16,10 +16,14 @@ class Stack:
         self.stack.append(item)
 
     def pop(self):
+        if self.s_size == 0:
+            raise StackException("cannot pop from an empty stack")
         self.s_size -= 1
         return self.stack.pop()
 
     def peek(self):
+        if self.s_size == 0:
+            raise StackException("cannot peek at an empty stack")
         return self.stack[-1]
 
     def isEmpty(self):
@@ -27,3 +31,7 @@ class Stack:
 
     def size(self):
         return self.s_size
+
+
+class StackException(Exception):
+    pass

@@ -3,7 +3,7 @@
 
 import unittest
 
-from data_structures.stack import Stack
+from data_structures.stack import Stack, StackException
 
 
 class StackTester(unittest.TestCase):
@@ -14,6 +14,10 @@ class StackTester(unittest.TestCase):
     def test_stack(self):
 
         self.assertTrue(self.s.isEmpty())
+        with self.assertRaises(StackException):
+            self.s.pop()
+        with self.assertRaises(StackException):
+            self.s.peek()
         self.s.push(2)
         self.assertFalse(self.s.isEmpty())
         self.assertEqual(1, self.s.size())
