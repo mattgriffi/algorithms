@@ -38,6 +38,8 @@ class QueueTester(unittest.TestCase):
                 elif len(self.sim):
                     self.assertFalse(self.q.isEmpty())
                     self.assertEqual(self.sim.pop(0), self.q.dequeue())
+                else:
+                    self.assertTrue(self.q.isEmpty())
 
 
 if __name__ == "__main__":
