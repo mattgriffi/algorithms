@@ -30,13 +30,19 @@ class SinglyLinkedListTester(unittest.TestCase):
         self.assertTrue(self.li.isEmpty())
 
     def test_pop(self):
+        with self.assertRaises(ListException):
+            self.li.pop(-5)
+        with self.assertRaises(ListException):
+            self.li.pop()
         for i in range(5):
             self.li.add(i)
-        self.assertEqual(4, self.li.pop())
-        self.assertEqual(3, self.li.pop())
-        self.assertEqual(0, self.li.pop(0))
+        with self.assertRaises(ListException):
+            self.li.pop(5)
+        self.assertEqual(0, self.li.pop())
+        self.assertEqual(1, self.li.pop())
+        self.assertEqual(4, self.li.pop(0))
         self.assertEqual(2, self.li.pop(1))
-        self.assertEqual(1, self.li.pop(0))
+        self.assertEqual(3, self.li.pop(0))
 
     def test_search_index(self):
         sim = [5, 6, 1, 7, 3, 2, 4, 9, 8, 0]
