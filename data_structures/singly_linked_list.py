@@ -4,21 +4,58 @@
 class SinglyLinkedList:
     def __init__(self):
         self.head = None
+        self.length = 0
 
     def add(self, item):
-        """Adds item to the start of the list."""
+        if self.head is None:
+            self.head = Node(item)
+        else:
+            temp = Node(item)
+            temp.next = self.head
+            self.head = temp
+        self.length += 1
 
     def remove(self, item):
-        """Removes given item from the list."""
+        """Removes first occurrence of given item from the list. Raises ListException if
+        list is empty or if item is not in the list. """
+
+        # Empty list
+        if self.head is None:
+            raise ListException("cannot remove from empty list")
+
+        # Item is at head
+        if self.head.data == item:
+            if self.head.next:
+                self.head = self.head.next
+            else:
+                self.head = None
+        # Item is not at head
+        else:
+            cursor = self.head
+            prev = self.head
+            while cursor is not None and cursor.data != item:
+                prev = cursor
+                cursor = cursor.next
+
+            # Item was not found
+            if cursor is None:
+                raise ListException("cannot remove nonexistent item: {}".format(item))
+
+            # Remove item
+            prev.next = cursor.next
+
+        self.length -= 1
 
     def search(self, item):
         """Returns True if item is in the list, else False."""
 
     def isEmpty(self):
         """Returns True if the list is empty, else False."""
+        return self.head is None
 
     def size(self):
         """Returns the number of items currently in the list."""
+        return self.length
 
     def append(self, item):
         """Adds item to the end of the list."""
