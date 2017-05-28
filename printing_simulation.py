@@ -15,47 +15,60 @@ from data_structures.queue import Queue
 
 def main():
 
-    hour = 60 * 60 # Seconds in an hour
-    print_chance = 1/180 # On average, 1 print task per 180 seconds
-    min_papers = 1
-    max_papers = 20
-    print_time = 60 / 5 # Seconds to print 1 paper
-    printer = Queue()
-    busy = False
-    timer = 0
-    task_time = 0
-    current_task = None
-    times = []
+    hour = 60 * 60  # Seconds in an hour
+    print_chance = 1/180  # On average, 1 print task per 180 seconds
+    print_time = 60 / 10  # Seconds to print 1 paper
+    printer = Printer(print_time)
 
     # Run the simulation
     for second in range(hour * 5):
 
         # Create new print tasks
         if second < hour and random.random() < print_chance:
-            papers = random.randint(min_papers, max_papers + 1)
-            print("New print task: {} papers".format(papers))
-            printer.enqueue((papers, second))
+            new_task = PrintTask(second)
+            print("New print task: {} papers".format(new_task.papers))
+            printer.enqueue(new_task)
 
-        # If the current task has finished
-        if busy and timer > task_time:
-            timer = 0
-            busy = False
-            time_taken = second - current_task[1]
-            times.append(time_taken)
+        printer.tick(second)
 
-        # If we just finished a task, start the next
-        if not busy and not printer.isEmpty():
-            busy = True
-            current_task = printer.dequeue()
-            task_time = print_time * current_task[0]
-            print("Task finished, time taken: {}".format(task_time))
-
-        # Increment the timer on the current task
-        timer += 1
+    times = printer.time_history
 
     print("Average time per print task: {}\nTotal time for all prints: {}".format(
             sum(times) / len(times), sum(times)))
 
+
+class PrintTask:
+    def __init__(self, time_stamp):
+        self.time = time_stamp
+        self.papers = random.randint(1, 20)
+
+    def get_wait_time(self, current_time):
+        return current_time - self.time
+
+
+class Printer(Queue):
+    def __init__(self, mode):
+        super().__init__()
+        self.print_time = mode
+        self.current_task = None
+        self.time_remaining = 0
+        self.time_history = []
+
+    def tick(self, time):
+        if self.time_remaining > 0:
+            self.time_remaining -= 1
+
+        if self.time_remaining == 0:
+            if self.current_task:
+                print("Task finished, time taken: {}".format(
+                        self.current_task.get_wait_time(time))
+                )
+                self.time_history.append(self.current_task.get_wait_time(time))
+            self.start_next_task()
+
+    def start_next_task(self):
+        self.current_task = self.dequeue() if not self.isEmpty() else None
+        self.time_remaining = self.current_task.papers * self.print_time if self.current_task else 0
 
 
 if __name__ == "__main__":
