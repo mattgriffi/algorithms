@@ -51,6 +51,12 @@ class SinglyLinkedList:
     def search(self, item):
         """Returns True if item is in the list, else False."""
 
+        cursor = self.head
+        while cursor is not None and cursor.data != item:
+            cursor = cursor.next
+
+        return cursor is not None
+
     def isEmpty(self):
         """Returns True if the list is empty, else False."""
         return self.head is None
@@ -62,11 +68,58 @@ class SinglyLinkedList:
     def append(self, item):
         """Adds item to the end of the list."""
 
+        temp = Node(item)
+
+        # If list is empty, new item becomes head
+        if self.head is None:
+            self.head = temp
+        # Go to the end of list and add the new item in
+        else:
+            cursor = self.head
+            for i in range(self.length - 1):
+                cursor = cursor.next
+            cursor.next = temp
+
+        self.length += 1
+
     def index(self, item):
         """Returns the index of the first occurrence of item in the list."""
 
+        if self.head is None:
+            raise ListException("cannot index an empty list")
+
+        cursor = self.head
+        index = 0
+        while cursor is not None and cursor.data != item:
+            index += 1
+            cursor = cursor.next
+
+        if self.head is None:
+            raise ListException("item does not exist in list")
+
+        return index
+
     def insert(self, pos, item):
-        """Inserts item at pos in the list, moving other items back."""
+        """Inserts item at pos in the list, moving other items back. Raises ListException if
+        pos is not a valid list index."""
+
+        if pos > self.length - 1 or pos < 0:
+            raise ListException("list index out of range")
+
+        temp = Node(item)
+
+        if pos == 0:
+            self.head = temp
+        else:
+            cursor = self.head
+            prev = cursor
+            for i in range(pos - 2):
+                prev = cursor
+                cursor = cursor.next
+            temp.next = cursor.next
+            cursor.next = temp
+
+        self.length += 1
 
     def pop(self, pos=-1):
         """Returns item at given pos, and removes it from the list. Will return and remove
@@ -101,6 +154,7 @@ class SinglyLinkedList:
             prev.next = cursor.next
             self.length -= 1
             return cursor.data
+
 
 class Node:
     def __init__(self, data):
