@@ -99,8 +99,91 @@ class SinglyLinkedListTester(unittest.TestCase):
         self.assertEqual(8, self.li.index(4))
 
     def test_fuzz(self):
-        pass
 
+        for i in range(20):
+
+            bias = random.uniform(0.45, 0.55)
+            li = SinglyLinkedList()
+            sim = []
+
+            self.assertTrue(li.isEmpty())
+            self.assertEqual(0, li.size())
+
+            for j in range(1000):
+
+                self.assertEqual(len(sim), li.size())
+
+                if len(sim) == 0:
+                    self.assertTrue(li.isEmpty())
+                    with self.assertRaises(ListException):
+                        self.li.pop()
+                    with self.assertRaises(ListException):
+                        self.li.pop(5)
+                    with self.assertRaises(ListException):
+                        self.li.remove(5)
+                    with self.assertRaises(ListException):
+                        self.li.index(5)
+                    with self.assertRaises(ListException):
+                        self.li.insert(1, 1)
+
+                # Insertion operations
+                if random.random() < bias:
+                    r = random.random()
+                    pos = random.randint(0, len(sim)*2)
+                    e = random.randint(-1000000000, 1000000000)
+
+                    # Test add
+                    if r < 0.33:
+                        li.add(e)
+                        sim.insert(0, e)
+                    # Test append
+                    elif r < 0.66:
+                        li.append(e)
+                        sim.append(e)
+                    # Test insert to a random index
+                    else:
+                        if pos < len(sim):
+                            li.insert(pos, e)
+                            sim.insert(pos, e)
+                        else:
+                            with self.assertRaises(ListException):
+                                li.insert(pos, e)
+
+                # Removal operations
+                elif not li.isEmpty():
+                    r = random.random()
+                    item = sim[random.randint(0, len(sim) - 1)]
+
+                    # Test remove
+                    if r < 0.33:
+                        li.remove(item)
+                        sim.remove(item)
+                    # Test pop at end
+                    elif r < 0.66:
+                        self.assertEqual(sim.pop(), li.pop())
+                    # Test pop at random index
+                    else:
+                        pos = random.randint(0, len(sim)*2)
+                        if pos < len(sim):
+                            self.assertEqual(sim.pop(pos), li.pop(pos))
+                        else:
+                            with self.assertRaises(ListException):
+                                li.pop(pos)
+
+                # Test search and index
+                if random.random() < 0.1:
+
+                    if len(sim) > 0:
+                        index = random.randint(0, len(sim) - 1)
+                        e = sim[index]
+                        self.assertEqual(sim.index(e), li.index(e))
+                        self.assertEqual(e in sim, li.search(e))
+
+                    r = random.randint(-1000000000, 1000000000)
+                    if r not in sim:
+                        self.assertFalse(li.search(r))
+                        with self.assertRaises(ListException):
+                            self.li.index(r)
 
 if __name__ == "__main__":
     unittest.main()
