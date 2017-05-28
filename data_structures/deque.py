@@ -18,7 +18,7 @@ class Deque:
         """Returns element at the front of the deque and removes it."""
         if len(self.q) == 0:
             raise DequeException("cannot remove from empty deque")
-        return self.q.remove(0)
+        return self.q.pop(0)
 
     def removeRear(self):
         """Returns element at the rear of the deque and removes it."""
