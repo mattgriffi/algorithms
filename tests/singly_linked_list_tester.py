@@ -58,6 +58,12 @@ class SinglyLinkedListTester(unittest.TestCase):
         self.assertEqual(0, self.li.size())
         self.assertTrue(self.li.isEmpty())
 
+    def test_append(self):
+        self.li.append(1)
+        self.li.append(2)
+        self.assertEqual(2, self.li.pop())
+        self.assertEqual(1, self.li.pop())
+
     def test_search_index(self):
         sim = [5, 6, 1, 7, 3, 2, 4, 9, 8, 0]
         for e in sim:
