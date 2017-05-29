@@ -24,10 +24,7 @@ class SinglyLinkedList:
 
         # Item is at head
         if self.head.data == item:
-            if self.head.next:
-                self.head = self.head.next
-            else:
-                self.head = None
+            self.head = self.head.next
         # Item is not at head
         else:
             cursor = self.head
