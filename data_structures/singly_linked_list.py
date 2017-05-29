@@ -8,12 +8,9 @@ class SinglyLinkedList:
 
     def add(self, item):
 
-        if self.head is None:
-            self.head = Node(item)
-        else:
-            temp = Node(item)
-            temp.next = self.head
-            self.head = temp
+        temp = Node(item)
+        temp.next = self.head
+        self.head = temp
 
         self.length += 1
 
