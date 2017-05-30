@@ -1,5 +1,8 @@
 """This program solves the Tower of Hanoi puzzle for a given number of disks.
 
+Information about the puzzle can be found here:
+https://en.wikipedia.org/wiki/Tower_of_Hanoi
+
 The number of steps to solve the puzzle is 2^n - 1 where n is the number of disks.
 """
 
