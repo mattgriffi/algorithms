@@ -47,6 +47,8 @@ class SearchTester(unittest.TestCase):
         self.assertEqual(4 in self.c, binary_search(self.c, 4))
         self.assertEqual(5 in self.c, binary_search(self.c, 5))
         self.assertEqual(6 in self.c, binary_search(self.c, 6))
+        self.assertEqual(0 in self.c, binary_search(self.c, 0))
+        self.assertEqual(-1 in self.c, binary_search(self.c, -1))
 
 
 if __name__ == "__main__":
