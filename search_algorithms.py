@@ -54,16 +54,16 @@ def binary_search(a: list, x) -> bool:
 def binary_search_recursive(a: list, x) -> bool:
     if len(a) == 0:
         return False
-    return binary_search_recurse(a, x, 0, len(a) - 1)
+    return __binary_search_recurse(a, x, 0, len(a) - 1)
 
 
-def binary_search_recurse(a: list, x, left, right) -> bool:
+def __binary_search_recurse(a: list, x, left, right) -> bool:
     mid = (left + right) // 2
     if a[mid] == x:
         return True
     elif left > right:
         return a[mid] == x
     elif x > a[mid]:
-        return binary_search_recurse(a, x, mid + 1, right)
+        return __binary_search_recurse(a, x, mid + 1, right)
     else:
-        return binary_search_recurse(a, x, left, mid - 1)
+        return __binary_search_recurse(a, x, left, mid - 1)
