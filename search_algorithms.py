@@ -12,3 +12,40 @@ def sequential_search(a: list, x) -> bool:
             return True
         i += 1
     return False
+
+
+def sorted_sequential_search(a: list, x) -> bool:
+    """This version of sequential search assumes the list is already sorted. It will stop
+    when it knows that it has passed the position where x ought to be.
+    It is still O(n)
+
+    Although it will stop sooner in the case where x is not in the list, it has to do twice
+    as many comparisons in the process, so whether or not this is actually an improvement at
+    all is debatable.
+    """
+    i = 0
+    while i < len(a) and a[i] <= x:
+        if a[i] == x:
+            return True
+        i += 1
+    return False
+
+
+def binary_search(a: list, x) -> bool:
+    """This function implements binary search. List a must be sorted.
+    O(log n)
+    """
+    if len(a) == 0:
+        return False
+
+    left = 0
+    right = len(a) - 1
+    mid = (left + right) // 2
+
+    while left < right and a[mid] != x:
+        if x > a[mid]:
+            left = mid + 1
+        elif x < a[mid]:
+            right = mid - 1
+        mid = (left + right) // 2
+    return a[mid] == x
