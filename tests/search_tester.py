@@ -29,40 +29,26 @@ class SearchTester(unittest.TestCase):
         self.assertEqual(False in self.d, sequential_search(self.d, False))
 
     def test_sorted_sequential_search(self):
-        self.assertEqual(1 in self.a, sorted_sequential_search(self.a, 1))
-        self.assertEqual(1 in self.b, sorted_sequential_search(self.b, 1))
-        self.assertEqual(2 in self.b, sorted_sequential_search(self.b, 2))
-        self.assertEqual(1 in self.c, sorted_sequential_search(self.c, 1))
-        self.assertEqual(2 in self.c, sorted_sequential_search(self.c, 2))
-        self.assertEqual(3 in self.c, sorted_sequential_search(self.c, 3))
-        self.assertEqual(4 in self.c, sorted_sequential_search(self.c, 4))
-        self.assertEqual(5 in self.c, sorted_sequential_search(self.c, 5))
+        self.sorted_search_helper(sorted_sequential_search)
 
     def test_binary_search(self):
-        self.assertEqual(1 in self.a, binary_search(self.a, 1))
-        self.assertEqual(1 in self.b, binary_search(self.b, 1))
-        self.assertEqual(2 in self.b, binary_search(self.b, 2))
-        self.assertEqual(1 in self.c, binary_search(self.c, 1))
-        self.assertEqual(2 in self.c, binary_search(self.c, 2))
-        self.assertEqual(3 in self.c, binary_search(self.c, 3))
-        self.assertEqual(4 in self.c, binary_search(self.c, 4))
-        self.assertEqual(5 in self.c, binary_search(self.c, 5))
-        self.assertEqual(6 in self.c, binary_search(self.c, 6))
-        self.assertEqual(0 in self.c, binary_search(self.c, 0))
-        self.assertEqual(-1 in self.c, binary_search(self.c, -1))
+        self.sorted_search_helper(binary_search)
         
     def test_recursive_binary_search(self):
-        self.assertEqual(1 in self.a, binary_search_recursive(self.a, 1))
-        self.assertEqual(1 in self.b, binary_search_recursive(self.b, 1))
-        self.assertEqual(2 in self.b, binary_search_recursive(self.b, 2))
-        self.assertEqual(1 in self.c, binary_search_recursive(self.c, 1))
-        self.assertEqual(2 in self.c, binary_search_recursive(self.c, 2))
-        self.assertEqual(3 in self.c, binary_search_recursive(self.c, 3))
-        self.assertEqual(4 in self.c, binary_search_recursive(self.c, 4))
-        self.assertEqual(5 in self.c, binary_search_recursive(self.c, 5))
-        self.assertEqual(6 in self.c, binary_search_recursive(self.c, 6))
-        self.assertEqual(0 in self.c, binary_search_recursive(self.c, 0))
-        self.assertEqual(-1 in self.c, binary_search_recursive(self.c, -1))
+        self.sorted_search_helper(binary_search_recursive)
+        
+    def sorted_search_helper(self, func):
+        self.assertEqual(1 in self.a, func(self.a, 1))
+        self.assertEqual(1 in self.b, func(self.b, 1))
+        self.assertEqual(2 in self.b, func(self.b, 2))
+        self.assertEqual(1 in self.c, func(self.c, 1))
+        self.assertEqual(2 in self.c, func(self.c, 2))
+        self.assertEqual(3 in self.c, func(self.c, 3))
+        self.assertEqual(4 in self.c, func(self.c, 4))
+        self.assertEqual(5 in self.c, func(self.c, 5))
+        self.assertEqual(6 in self.c, func(self.c, 6))
+        self.assertEqual(0 in self.c, func(self.c, 0))
+        self.assertEqual(-1 in self.c, func(self.c, -1))
 
     def test_binary_search_fuzz(self):
 
