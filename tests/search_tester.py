@@ -4,7 +4,8 @@
 import random
 import unittest
 
-from search_algorithms import sequential_search, sorted_sequential_search, binary_search
+from search_algorithms import sequential_search, sorted_sequential_search, binary_search, \
+binary_search_recursive
 
 
 class SearchTester(unittest.TestCase):
@@ -49,6 +50,19 @@ class SearchTester(unittest.TestCase):
         self.assertEqual(6 in self.c, binary_search(self.c, 6))
         self.assertEqual(0 in self.c, binary_search(self.c, 0))
         self.assertEqual(-1 in self.c, binary_search(self.c, -1))
+        
+    def test_recursive_binary_search(self):
+        self.assertEqual(1 in self.a, binary_search_recursive(self.a, 1))
+        self.assertEqual(1 in self.b, binary_search_recursive(self.b, 1))
+        self.assertEqual(2 in self.b, binary_search_recursive(self.b, 2))
+        self.assertEqual(1 in self.c, binary_search_recursive(self.c, 1))
+        self.assertEqual(2 in self.c, binary_search_recursive(self.c, 2))
+        self.assertEqual(3 in self.c, binary_search_recursive(self.c, 3))
+        self.assertEqual(4 in self.c, binary_search_recursive(self.c, 4))
+        self.assertEqual(5 in self.c, binary_search_recursive(self.c, 5))
+        self.assertEqual(6 in self.c, binary_search_recursive(self.c, 6))
+        self.assertEqual(0 in self.c, binary_search_recursive(self.c, 0))
+        self.assertEqual(-1 in self.c, binary_search_recursive(self.c, -1))
 
     def test_binary_search_fuzz(self):
 
