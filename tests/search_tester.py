@@ -4,7 +4,7 @@
 import random
 import unittest
 
-from search_algorithms import sequential_search
+from search_algorithms import sequential_search, sorted_sequential_search, binary_search
 
 
 class SearchTester(unittest.TestCase):
@@ -12,7 +12,7 @@ class SearchTester(unittest.TestCase):
     def setUp(self):
         self.a = []
         self.b = [1]
-        self.c = [1, 2, 3, 4]
+        self.c = [0, 1, 2, 3, 4]
         self.d = [1, 2, True, "hello"]
 
     def test_sequential_search(self):
@@ -27,8 +27,26 @@ class SearchTester(unittest.TestCase):
         self.assertEqual("hi" in self.d, sequential_search(self.d, "hi"))
         self.assertEqual(False in self.d, sequential_search(self.d, False))
 
+    def test_sorted_sequential_search(self):
+        self.assertEqual(1 in self.a, sorted_sequential_search(self.a, 1))
+        self.assertEqual(1 in self.b, sorted_sequential_search(self.b, 1))
+        self.assertEqual(2 in self.b, sorted_sequential_search(self.b, 2))
+        self.assertEqual(1 in self.c, sorted_sequential_search(self.c, 1))
+        self.assertEqual(2 in self.c, sorted_sequential_search(self.c, 2))
+        self.assertEqual(3 in self.c, sorted_sequential_search(self.c, 3))
+        self.assertEqual(4 in self.c, sorted_sequential_search(self.c, 4))
+        self.assertEqual(5 in self.c, sorted_sequential_search(self.c, 5))
+
     def test_binary_search(self):
-        pass
+        self.assertEqual(1 in self.a, binary_search(self.a, 1))
+        self.assertEqual(1 in self.b, binary_search(self.b, 1))
+        self.assertEqual(2 in self.b, binary_search(self.b, 2))
+        self.assertEqual(1 in self.c, binary_search(self.c, 1))
+        self.assertEqual(2 in self.c, binary_search(self.c, 2))
+        self.assertEqual(3 in self.c, binary_search(self.c, 3))
+        self.assertEqual(4 in self.c, binary_search(self.c, 4))
+        self.assertEqual(5 in self.c, binary_search(self.c, 5))
+        self.assertEqual(6 in self.c, binary_search(self.c, 6))
 
 
 if __name__ == "__main__":
