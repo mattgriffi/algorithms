@@ -4,7 +4,7 @@
 import random
 import unittest
 
-from recursive_practice import factorial
+from recursive_practice import factorial, reverse_list
 
 
 class RecursiveTester(unittest.TestCase):
@@ -25,6 +25,19 @@ class RecursiveTester(unittest.TestCase):
         self.assertEqual(5040, factorial(7))
         self.assertEqual(265252859812191058636308480000000, factorial(30))
 
+    def test_reverse_list(self):
+        lists = [
+            [],
+            [2],
+            [1, 2],
+            [1, 2, 3],
+            [1, 2, 3, 4],
+            [1, 2, 3, 4, 5],
+            [True, False, True, False, False, False, True],
+            [3, 45, 2,34, 234, 32424, 24, 23, 4]
+        ]
+        for a in lists:
+            self.assertEqual(list(reversed(a)), reverse_list(a))
 
 if __name__ == "__main__":
     unittest.main()
