@@ -90,6 +90,13 @@ class MapTester(unittest.TestCase):
         with self.assertRaises(MapException):
             _ = self.m[range]
 
+    def test_del(self):
+        self.m["a"] = 1
+        self.assertEqual(1, self.m.len())
+        del self.m["a"]
+        self.assertIsNone(self.m["a"])
+        self.assertEqual(0, self.m.len())
+
 
 if __name__ == "__main__":
     unittest.main()
