@@ -85,9 +85,30 @@ def insertion_sort(a: list):
     return b
 
 
-
 def shell_sort(a: list):
-    return a
+    b = a.copy()
+    n = len(b)
+
+    shell_helper(b, 0, 1)
+
+    return b
+
+
+def shell_helper(a: list, start: int, gap: int):
+    n = len(a)
+
+    # Assume the first item in the list is a sorted sub-list and loop through the rest
+    for i in range(start + gap, n, gap):
+        # Get the next item to be sorted
+        to_sort = a[i]
+        # Loop backwards through the items of the sorted sub-list
+        cursor = i - gap
+        while cursor >= start and a[cursor] > to_sort:
+            # If an item is larger than the current item being sorted, move it to the right
+            a[cursor + gap] = a[cursor]
+            cursor -= gap
+        # Once the proper place has been found, insert the item
+        a[cursor + gap] = to_sort
 
 
 def merge_sort(a: list):
