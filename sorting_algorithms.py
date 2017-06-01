@@ -89,12 +89,14 @@ def shell_sort(a: list):
     b = a.copy()
     n = len(b)
 
-    shell_helper(b, 0, 1)
+    _shell_helper(b, 0, 1)
 
     return b
 
 
-def shell_helper(a: list, start: int, gap: int):
+def _shell_helper(a: list, start: int, gap: int):
+    """This function sorts every gap'th item of the list in place, by way of insertion sort.
+    It is used for shell sort."""
     n = len(a)
 
     # Assume the first item in the list is a sorted sub-list and loop through the rest
