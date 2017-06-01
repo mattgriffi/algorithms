@@ -80,6 +80,16 @@ class MapTester(unittest.TestCase):
         self.m.put("ha", "lkjasfdlj")
         self.assertTrue("ha" in self.m)
 
+    def test_set_get(self):
+        self.m["a"] = 3
+        self.assertEqual(3, self.m["a"])
+        self.m["a"] = 4
+        self.assertEqual(4, self.m["a"])
+        self.assertIsNone(self.m["lkjasdf"])
+
+        with self.assertRaises(MapException):
+            _ = self.m[range]
+
 
 if __name__ == "__main__":
     unittest.main()
