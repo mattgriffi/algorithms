@@ -24,8 +24,20 @@ class Map:
     def len(self):
         """Returns the number of key-value pairs in the map."""
 
-    def __hash(self, key):
+    def _hash(self, key):
         """Returns the hash code for the given key."""
+        if type(key) == str:
+            total = 0
+            for c in key:
+                total += ord(c)
+            key = total
+        elif type(key) == int:
+            pass
+        else:
+            raise MapException(f"key must be of type str or int, not {type(key)}")
+        # This hash function was created by putting random bitwise operators together
+        # It is probably terrible
+        return ~((key ^ (key * 7)) << 20) % self.size
 
     def __delitem__(self, key):
         pass
@@ -38,3 +50,7 @@ class Pair:
     def __init__(self, key, value):
         self.key = key
         self.value = value
+
+
+class MapException(Exception):
+    pass
