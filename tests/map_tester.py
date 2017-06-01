@@ -72,6 +72,14 @@ class MapTester(unittest.TestCase):
         self.m.put(4, 6)
         self.assertEqual(3, self.m.len())
 
+    def test_contains(self):
+        self.assertFalse(3 in self.m)
+        self.assertFalse("hello" in self.m)
+        self.m.put(3, 5)
+        self.assertTrue(3 in self.m)
+        self.m.put("ha", "lkjasfdlj")
+        self.assertTrue("ha" in self.m)
+
 
 if __name__ == "__main__":
     unittest.main()
