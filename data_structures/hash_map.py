@@ -86,6 +86,12 @@ class Map:
                     return True
         return False
 
+    def __getitem__(self, key):
+        self.get(key)
+
+    def __setitem__(self, key, value):
+        self.put(key, value)
+
 
 class Pair:
     def __init__(self, key, value):
