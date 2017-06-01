@@ -30,6 +30,11 @@ def bubble_sort(a: list):
 
 
 def selection_sort(a: list):
+    """Selection Sort loops through the list slot by slot, and finds the item that needs to go
+    into each slot, in order. It is much faster than bubble sort in most cases because it only
+    makes 1 swap per pass.
+    O(n^2)
+    """
     b = a.copy()
     n = len(b)
 
@@ -56,7 +61,29 @@ def selection_sort(a: list):
 
 
 def insertion_sort(a: list):
-    return a
+    """Insertion Sort iterates through the list, taking each item and putting it in a sorted
+    subsection at the start of the list. To do this, it needs to shift elements to the right
+    to make room for the insertion.
+    O(n^2)
+    """
+    b = a.copy()
+    n = len(b)
+
+    # Assume the first item in the list is a sorted sub-list and loop through the rest
+    for i in range(1, n):
+        # Get the next item to be sorted
+        to_sort = b[i]
+        # Loop backwards through the items of the sorted sub-list
+        cursor = i - 1
+        while cursor >= 0 and b[cursor] > to_sort:
+            # If an item is larger than the current item being sorted, move it to the right
+            b[cursor + 1] = b[cursor]
+            cursor -= 1
+        # Once the proper place has been found, insert the item
+        b[cursor + 1] = to_sort
+
+    return b
+
 
 
 def shell_sort(a: list):
