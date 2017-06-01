@@ -57,16 +57,13 @@ class Map:
     def _hash(self, key):
         """Returns the hash code for the given key."""
 
-        if type(key) == str:
+        if type(key) is str:
             total = 0
             for c in key:
                 total += ord(c)
             key = total
 
-        elif type(key) == int:
-            pass
-
-        else:
+        elif type(key) is not int:
             raise MapException(f"key must be of type str or int, not {type(key)}")
 
         # This hash function was created by putting random bitwise operators together
