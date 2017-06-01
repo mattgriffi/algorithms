@@ -81,6 +81,7 @@ class Map:
             for i, pair in enumerate(position):
                 if pair.key == key:
                     del position[i]
+                    self.num_pairs -= 1
                     break
 
     def __contains__(self, key):
