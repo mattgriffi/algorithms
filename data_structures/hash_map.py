@@ -3,7 +3,7 @@
 
 class Map:
 
-    def __init__(self, size):
+    def __init__(self, size: int):
         """Creates a map with specified size. Note that size does not limit the number of
         key-value pairs that can be held in the map, but rather it controls the number of
         addresses available for hashing and storing keys. A larger size will reduce the odds
