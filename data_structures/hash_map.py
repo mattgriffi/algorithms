@@ -14,6 +14,24 @@ class Map:
     def put(self, key, val):
         """Add a new key-value pair. If key already exists in map, its value will be
         overwritten."""
+        key_hash = self._hash(key)
+        position = self.table[key_hash]
+        # If that position in the table is empty
+        if not position:
+            # Add a new list with the new key-value pair
+            self.table[key_hash] = [Pair(key, val)]
+        # If there is already a list at that position
+        else:
+            already_exists = False
+            # Update value of key if it already exists
+            for pair in position:
+                if pair.key == key:
+                    pair.value = val
+                    already_exists = True
+                    break
+            # Otherwise, add the key-value pair
+            if not already_exists:
+                position.append(Pair(key, val))
 
     def get(self, key):
         """Returns the value of give key, or None if key is not in the map."""
@@ -23,13 +41,9 @@ class Map:
         position = self.table[key_hash]
         # If there is anything at that position
         if position:
-            try:
-                # Search that list for the key
-                i = position.index(key)
-                # Get the value of the Pair object at that index
-                value = position[i].value
-            except:
-                pass
+            for pair in position:
+                if pair.key == key:
+                    value = pair.value
 
         return value
 
