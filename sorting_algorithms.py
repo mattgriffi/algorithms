@@ -30,7 +30,29 @@ def bubble_sort(a: list):
 
 
 def selection_sort(a: list):
-    return a
+    b = a.copy()
+    n = len(b)
+
+    # Set the index we are currently trying to fill (left to right)
+    index = 0
+
+    while index < n:
+        # Assume that the current index is the smallest item left in the list
+        smallest_i = index
+        smallest = b[smallest_i]
+        # Check the rest of the items in the list to the right
+        for i in range(index + 1, n):
+            # If any of them are smaller
+            if b[i] < smallest:
+                # Mark it as the smallest item
+                smallest = b[i]
+                smallest_i = i
+        # Swap the current index with the smallest item we found
+        b[index], b[smallest_i] = b[smallest_i], b[index]
+        # Go to the next index
+        index += 1
+
+    return b
 
 
 def insertion_sort(a: list):
