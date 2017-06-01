@@ -1,7 +1,4 @@
-"""This class implements a hash map."""
-
-
-from data_structures.singly_linked_list import SinglyLinkedList
+"""This class implements a hash map. It uses the chaining method to handle collisions."""
 
 
 class Map:
@@ -20,6 +17,21 @@ class Map:
 
     def get(self, key):
         """Returns the value of give key, or None if key is not in the map."""
+        key_hash = self._hash(key)
+        value = None
+        # Get the list at the hashed position of the table
+        position = self.table[key_hash]
+        # If there is anything at that position
+        if position:
+            try:
+                # Search that list for the key
+                i = position.index(key)
+                # Get the value of the Pair object at that index
+                value = position[i].value
+            except:
+                pass
+
+        return value
 
     def len(self):
         """Returns the number of key-value pairs in the map."""
