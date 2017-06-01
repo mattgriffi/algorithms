@@ -14,13 +14,13 @@ class SortTester(unittest.TestCase):
         self.a = []
         self.b = [1]
         self.c = [2, 1]
-        self.cs = self.c.sort()
+        self.cs = sorted(self.c)
         self.d = [3, 2, 1, 1, 2, 3, 5, 4, 3, 6, 8, 9]
-        self.ds = self.d.sort()
+        self.ds = sorted(self.d)
         self.e = [3, 5, 3, 7, 4, 2, 3, 2, 6, 8, 5]
-        self.es = self.e.sort()
+        self.es = sorted(self.e)
         self.f = [random.randint(-1000, 1000) for _ in range(random.randint(990, 1010))]
-        self.fs = self.f.sort()
+        self.fs = sorted(self.f)
 
     def sort_helper(self, func):
         self.assertEqual(self.a, func(self.a))

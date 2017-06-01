@@ -1,4 +1,4 @@
-"""This programs implements various sorting algorithms."""
+"""This program implements various sorting algorithms."""
 
 
 def bubble_sort(a: list):
