@@ -11,15 +11,18 @@ def bubble_sort(a: list):
     b = a.copy()
     # Get the len of the list
     n = len(b)
+    already_sorted = False
 
     # While there is more than 1 item in the unsorted portion of the list
-    while n > 1:
+    while n > 1 and not already_sorted:
+        already_sorted = True
         # Loop through the pairs of items in the unsorted portion
         for i in range(n - 1):
             # If the left item in the pair is greater than the right
             if b[i] > b[i + 1]:
                 # Swap them
                 b[i], b[i + 1] = b[i + 1], b[i]
+                already_sorted = False
         # Mark the last item in the list as sorted
         n -= 1
 
