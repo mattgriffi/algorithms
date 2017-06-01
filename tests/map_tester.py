@@ -42,24 +42,35 @@ class MapTester(unittest.TestCase):
         self.assertEqual(1, self.m.get("a"))
         self.m.put("a", 3)
         self.assertEqual(3, self.m.get("a"))
+        self.assertEqual(3, self.m.get("a"))
 
         self.m.put("b", 1)
-        self.m.put("c", 2)
-        self.m.put("d", 3)
+        self.m.put(2, 2)
+        self.m.put(3, 3)
         self.m.put("e", 4)
         self.assertEqual(1, self.m.get("b"))
-        self.assertEqual(2, self.m.get("c"))
-        self.assertEqual(3, self.m.get("d"))
+        self.assertEqual(2, self.m.get(2))
+        self.assertEqual(3, self.m.get(3))
         self.assertEqual(4, self.m.get("e"))
 
         self.assertIsNone(self.m.get("alsjkdf"))
-        self.assertIsNone(self.m.get(3))
+        self.assertIsNone(self.m.get(4))
         self.assertIsNone(self.m.get(0))
 
         with self.assertRaises(MapException):
             self.assertIsNone(self.m.get(None))
         with self.assertRaises(MapException):
             self.assertIsNone(self.m.get(range))
+
+    def test_len(self):
+        self.assertEqual(0, self.m.len())
+        self.m.put(2, 3)
+        self.assertEqual(1, self.m.len())
+        self.m.put(3, 4)
+        self.m.put(4, 5)
+        self.assertEqual(3, self.m.len())
+        self.m.put(4, 6)
+        self.assertEqual(3, self.m.len())
 
 
 if __name__ == "__main__":
