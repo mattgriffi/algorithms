@@ -75,7 +75,13 @@ class Map:
         return ~((key ^ (key * 7)) << 20) % self.size
 
     def __delitem__(self, key):
-        pass
+        key_hash = self._hash(key)
+        position = self.table[key_hash]
+        if position:
+            for i, pair in enumerate(position):
+                if pair.key == key:
+                    del position[i]
+                    break
 
     def __contains__(self, key):
         key_hash = self._hash(key)
