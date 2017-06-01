@@ -78,7 +78,13 @@ class Map:
         pass
 
     def __contains__(self, key):
-        pass
+        key_hash = self._hash(key)
+        position = self.table[key_hash]
+        if position:
+            for pair in position:
+                if pair.key == key:
+                    return True
+        return False
 
 
 class Pair:
