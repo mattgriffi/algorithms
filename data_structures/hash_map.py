@@ -87,7 +87,7 @@ class Map:
         return False
 
     def __getitem__(self, key):
-        self.get(key)
+        return self.get(key)
 
     def __setitem__(self, key, value):
         self.put(key, value)
