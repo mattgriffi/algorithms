@@ -8,6 +8,10 @@ class Map:
         key-value pairs that can be held in the map, but rather it controls the number of
         addresses available for hashing and storing keys. A larger size will reduce the odds
         of collisions and increase speed at the cost of initial memory usage."""
+
+        if size <= 0:
+            raise MapException("size must be greater than 0")
+
         self.size = size
         self.table = [None] * size
         self.num_pairs = 0
