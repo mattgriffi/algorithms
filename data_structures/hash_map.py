@@ -7,9 +7,10 @@ class Map:
         """Creates a map with specified size. Note that size does not limit the number of
         key-value pairs that can be held in the map, but rather it controls the number of
         addresses available for hashing and storing keys. A larger size will reduce the odds
-        of collisions, at the cost of initial memory usage."""
+        of collisions and increase speed at the cost of initial memory usage."""
         self.size = size
         self.table = [None] * size
+        self.num_pairs = 0
 
     def put(self, key, val):
         """Add a new key-value pair. If key already exists in map, its value will be
@@ -20,6 +21,7 @@ class Map:
         if not position:
             # Add a new list with the new key-value pair
             self.table[key_hash] = [Pair(key, val)]
+            self.num_pairs += 1
         # If there is already a list at that position
         else:
             already_exists = False
@@ -32,6 +34,7 @@ class Map:
             # Otherwise, add the key-value pair
             if not already_exists:
                 position.append(Pair(key, val))
+                self.num_pairs += 1
 
     def get(self, key):
         """Returns the value of give key, or None if key is not in the map."""
@@ -49,18 +52,23 @@ class Map:
 
     def len(self):
         """Returns the number of key-value pairs in the map."""
+        return self.num_pairs
 
     def _hash(self, key):
         """Returns the hash code for the given key."""
+
         if type(key) == str:
             total = 0
             for c in key:
                 total += ord(c)
             key = total
+
         elif type(key) == int:
             pass
+
         else:
             raise MapException(f"key must be of type str or int, not {type(key)}")
+
         # This hash function was created by putting random bitwise operators together
         # It is probably terrible
         return ~((key ^ (key * 7)) << 20) % self.size
