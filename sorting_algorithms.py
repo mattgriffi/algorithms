@@ -188,7 +188,7 @@ def _quick_helper(a: list, start: int, end: int):
 def _quick_partition(a: list, start: int, end: int):
 
     mid = (start + end) // 2
-
+    # Sort the first, last, and mid items so that the mid is the median
     if a[start] > a[end]:
         _swap(a, start, end)
     if a[start] > a[mid]:
@@ -197,26 +197,30 @@ def _quick_partition(a: list, start: int, end: int):
         _swap(a, mid, end)
 
     pivot = mid
-
     left = start
     right = end
 
     done = False
 
+    # While the left and right pointers have not crossed
     while not done:
-
+        # Move the left pointer to the right until it either crosses the right pointer
+        # or it finds a value greater than the pivot
         while left <= right and a[left] <= a[pivot]:
             left += 1
 
+        # Move the right pointer to the left until it either crosses the left pointer
+        # or it finds a value less than the pivot
         while right >= left and a[right] >= a[pivot]:
             right -= 1
 
+        # If the pointers crossed, we're done
         if right < left:
             done = True
-
+        # If they didn't cross yet, swap the two values
         else:
             _swap(a, left, right)
-
+    # Swap the pivot with the correct pointer
     if right < pivot:
         _swap(a, left, pivot)
         split = left

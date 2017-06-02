@@ -12,7 +12,7 @@ from sorting_algorithms import bubble_sort, selection_sort, insertion_sort, shel
 class SortTester(unittest.TestCase):
 
     def setUp(self):
-        self.a = [7, -5, -3, -6, -9, 5, -6]
+        self.a = []
         self.b = [1]
         self.c = [2, 1]
         self.cs = sorted(self.c)
