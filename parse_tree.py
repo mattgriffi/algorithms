@@ -32,7 +32,7 @@ def build_parse_tree(exp):
             current_node = current_node.right
         # Otherwise it must be an integer, so convert to int, put in node, then move to parent
         else:
-            current_node.key = int(token)
+            current_node.key = float(token)
             current_node = node_stack.pop()
 
     return tree
@@ -52,5 +52,5 @@ def evaluate(parse_tree):
                 evaluate(parse_tree.right)
         )
 
-tree = build_parse_tree("( ( 10 + 5 ) * 3 )")
+tree = build_parse_tree("( ( 10 + 5 ) * 3.5 )")
 print(evaluate(tree))
