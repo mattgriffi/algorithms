@@ -170,14 +170,13 @@ def merge_sort(a: list):
 
 
 def quick_sort(a: list):
-    if len(a) <= 1:
-        return a
     b = a.copy()
     _quick_helper(b, 0, len(b) - 1)
     return b
 
 
 def _quick_helper(a: list, start: int, end: int):
+
     if start < end:
 
         split = _quick_partition(a, start, end)
@@ -187,27 +186,46 @@ def _quick_helper(a: list, start: int, end: int):
 
 
 def _quick_partition(a: list, start: int, end: int):
-    pivot = a[start]
 
-    left = start + 1
+    mid = (start + end) // 2
+
+    if a[start] > a[end]:
+        _swap(a, start, end)
+    if a[start] > a[mid]:
+        _swap(a, start, mid)
+    if a[mid] > a[end]:
+        _swap(a, mid, end)
+
+    pivot = mid
+
+    left = start
     right = end
 
     done = False
 
     while not done:
 
-        while left <= right and a[left] <= pivot:
+        while left <= right and a[left] <= a[pivot]:
             left += 1
 
-        while right >= left and a[right] >= pivot:
+        while right >= left and a[right] >= a[pivot]:
             right -= 1
 
         if right < left:
             done = True
 
         else:
-            a[left], a[right] = a[right], a[left]
+            _swap(a, left, right)
 
-    a[start], a[right] = a[right], a[start]
+    if right < pivot:
+        _swap(a, left, pivot)
+        split = left
+    else:
+        _swap(a, right, pivot)
+        split = right
 
-    return right
+    return split
+
+
+def _swap(a, l, r):
+    a[l], a[r] = a[r], a[l]
