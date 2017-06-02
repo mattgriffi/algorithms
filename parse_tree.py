@@ -52,5 +52,23 @@ def evaluate(parse_tree):
                 evaluate(parse_tree.right)
         )
 
-tree = build_parse_tree("( ( 10 + 5 ) * 3.5 )")
-print(evaluate(tree))
+
+def print_preorder(tree):
+    if tree:
+        print(tree.key, " ", end='')
+        print_preorder(tree.left)
+        print_preorder(tree.right)
+
+
+def print_inorder(tree):
+    if tree:
+        print_inorder(tree.left)
+        print(tree.key, " ", end='')
+        print_inorder(tree.right)
+
+
+def print_postorder(tree):
+    if tree:
+        print_postorder(tree.left)
+        print_postorder(tree.right)
+        print(tree.key, " ", end='')
