@@ -8,7 +8,7 @@ class BinaryTree:
         self.left = None
         self.right = None
 
-    def insert_left(self, key):
+    def insert_left(self, key=None):
         if self.left is None:
             self.left = BinaryTree(key)
         else:
@@ -16,7 +16,7 @@ class BinaryTree:
             new.left = self.left
             self.left = new
 
-    def insert_right(self, key):
+    def insert_right(self, key=None):
         if self.right is None:
             self.right = BinaryTree(key)
         else:
