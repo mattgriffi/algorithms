@@ -24,14 +24,20 @@ class SortTester(unittest.TestCase):
         self.fs = sorted(self.f)
 
     def sort_helper(self, func):
-        self.assertEqual(self.a, func(self.a))
-        self.assertEqual(self.b, func(self.b))
-        self.assertEqual(self.cs, func(self.c))
-        self.assertEqual(self.ds, func(self.d))
-        self.assertEqual(self.es, func(self.e))
-        start = time.time()
-        self.assertEqual(self.fs, func(self.f))
-        print(f"Time taken by {func.__name__}: {time.time() - start}")
+        self.assert_with_message(func, self.a)
+        self.assert_with_message(func, self.b)
+        self.assert_with_message(func, self.c)
+        self.assert_with_message(func, self.d)
+        self.assert_with_message(func, self.e)
+        # start = time.time()
+        self.assert_with_message(func, self.f)
+        # print(f"Time taken by {func.__name__}: {time.time() - start}")
+
+    def assert_with_message(self, func, a):
+        correct = sorted(a)
+        result = func(a)
+        self.assertEqual(correct, result,
+                         f"\nOriginal: {a}\nCorrect: {correct}\nGiven: {result}")
 
     def test_bubble(self):
         self.sort_helper(bubble_sort)
