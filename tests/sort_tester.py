@@ -12,7 +12,7 @@ from sorting_algorithms import bubble_sort, selection_sort, insertion_sort, shel
 class SortTester(unittest.TestCase):
 
     def setUp(self):
-        self.a = []
+        self.a = [7, -5, -3, -6, -9, 5, -6]
         self.b = [1]
         self.c = [2, 1]
         self.cs = sorted(self.c)
@@ -22,6 +22,9 @@ class SortTester(unittest.TestCase):
         self.es = sorted(self.e)
         self.f = [random.randint(-1000, 1000) for _ in range(random.randint(990, 1010))]
         self.fs = sorted(self.f)
+        self.random = []
+        for _ in range(200):
+            self.random.append([random.randint(-10, 10) for _ in range(20)])
 
     def sort_helper(self, func):
         self.assert_with_message(func, self.a)
@@ -29,15 +32,18 @@ class SortTester(unittest.TestCase):
         self.assert_with_message(func, self.c)
         self.assert_with_message(func, self.d)
         self.assert_with_message(func, self.e)
-        # start = time.time()
+        start = time.time()
         self.assert_with_message(func, self.f)
-        # print(f"Time taken by {func.__name__}: {time.time() - start}")
+        print(f"Time taken by {func.__name__}: {time.time() - start}")
+
+        for a in self.random:
+            self.assert_with_message(func, a)
 
     def assert_with_message(self, func, a):
         correct = sorted(a)
         result = func(a)
         self.assertEqual(correct, result,
-                         f"\nOriginal: {a}\nCorrect: {correct}\nGiven: {result}")
+                         f"\nOriginal: {a}\nCorrect:  {correct}\nGiven:    {result}")
 
     def test_bubble(self):
         self.sort_helper(bubble_sort)
