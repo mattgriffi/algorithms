@@ -178,4 +178,36 @@ def quick_sort(a: list):
 
 
 def _quick_helper(a: list, start: int, end: int):
-    pass
+    if start < end:
+
+        split = _quick_partition(a, start, end)
+
+        _quick_helper(a, start, split - 1)
+        _quick_helper(a, split + 1, end)
+
+
+def _quick_partition(a: list, start: int, end: int):
+    pivot = a[start]
+
+    left = start + 1
+    right = end
+
+    done = False
+
+    while not done:
+
+        while left <= right and a[left] <= pivot:
+            left += 1
+
+        while right >= left and a[right] >= pivot:
+            right -= 1
+
+        if right < left:
+            done = True
+
+        else:
+            a[left], a[right] = a[right], a[left]
+
+    a[start], a[right] = a[right], a[start]
+
+    return right
