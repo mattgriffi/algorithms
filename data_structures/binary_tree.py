@@ -3,7 +3,7 @@
 
 class BinaryTree:
 
-    def __init__(self, root):
+    def __init__(self, root=None):
         self.key = root
         self.left = None
         self.right = None
