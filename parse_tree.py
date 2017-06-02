@@ -14,18 +14,18 @@ def build_parse_tree(exp):
 
     for token in tokens:
         if token == "(":
-            current_node.left = BinaryTree()
+            current_node.insert_left()
             node_stack.push(current_node)
             current_node = current_node.left
         elif token == ")":
             current_node = node_stack.pop()
         elif token in operators:
             current_node.key = token
-            current_node.right = BinaryTree
+            current_node.insert_right()
             node_stack.push(current_node)
             current_node = current_node.right
         else:
-            current_node.key = token
+            current_node.key = int(token)
             current_node = node_stack.pop()
 
     return tree
