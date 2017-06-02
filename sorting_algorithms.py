@@ -86,10 +86,25 @@ def insertion_sort(a: list):
 
 
 def shell_sort(a: list):
+    """Shell Sort is a modified version of insertion sort. It defines a gap, and treats every
+    item in the list that is gap indices apart as being part of a sub-list. It sorts these sub-
+    lists before sorting the whole list with a normal insertion sort. By doing multiple passes
+    with decreasing gap lengths, the run time is greatly reduced compared to a normal
+    insertion sort.
+    This implementation uses gaps defined by the formula 2^k - 1, which gives a time complexity
+    of O(n^(3/2))"""
+    if len(a) <= 1:
+        return a
+
     b = a.copy()
     n = len(b)
 
-    _shell_helper(b, 0, 1)
+    from math import log2
+    gaps = [2 ** k - 1 for k in range(1, int(log2(n)) + 1)]
+
+    for gap in reversed(gaps):
+        for start in range(gap):
+            _shell_helper(b, start, gap)
 
     return b
 
@@ -97,10 +112,10 @@ def shell_sort(a: list):
 def _shell_helper(a: list, start: int, gap: int):
     """This function sorts every gap'th item of the list in place, by way of insertion sort.
     It is used for shell sort."""
-    n = len(a)
 
     # Assume the first item in the list is a sorted sub-list and loop through the rest
-    for i in range(start + gap, n, gap):
+    # Treat the items at every gap'th index as if they were the entire list
+    for i in range(start + gap, len(a), gap):
         # Get the next item to be sorted
         to_sort = a[i]
         # Loop backwards through the items of the sorted sub-list

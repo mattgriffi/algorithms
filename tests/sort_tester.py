@@ -2,6 +2,7 @@
 
 
 import random
+import time
 import unittest
 
 from sorting_algorithms import bubble_sort, selection_sort, insertion_sort, shell_sort, \
@@ -28,7 +29,9 @@ class SortTester(unittest.TestCase):
         self.assertEqual(self.cs, func(self.c))
         self.assertEqual(self.ds, func(self.d))
         self.assertEqual(self.es, func(self.e))
+        start = time.time()
         self.assertEqual(self.fs, func(self.f))
+        print(f"Time taken by {func.__name__}: {time.time() - start}")
 
     def test_bubble(self):
         self.sort_helper(bubble_sort)
