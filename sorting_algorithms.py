@@ -170,4 +170,12 @@ def merge_sort(a: list):
 
 
 def quick_sort(a: list):
-    return a
+    if len(a) <= 1:
+        return a
+    b = a.copy()
+    _quick_helper(b, 0, len(b) - 1)
+    return b
+
+
+def _quick_helper(a: list, start: int, end: int):
+    pass
