@@ -37,4 +37,20 @@ def build_parse_tree(exp):
 
     return tree
 
-build_parse_tree("( ( 10 + 5 ) * 3 )")
+
+def evaluate(parse_tree):
+    operators = {"+": (lambda x, y: x + y), "-": (lambda x, y: x - y),
+                 "*": (lambda x, y: x * y), "/": (lambda x, y: x / y),
+                 "//": (lambda x, y: x // y), "%": (lambda x, y: x % y),
+                 "**": (lambda x, y: x ** y)}
+
+    if parse_tree.key not in operators:
+        return parse_tree.key
+    else:
+        return operators[parse_tree.key](
+                evaluate(parse_tree.left),
+                evaluate(parse_tree.right)
+        )
+
+tree = build_parse_tree("( ( 10 + 5 ) * 3 )")
+print(evaluate(tree))
