@@ -129,7 +129,44 @@ def _shell_helper(a: list, start: int, gap: int):
 
 
 def merge_sort(a: list):
-    return a
+    """Merge Sort sorts a list by breaking it down into smaller sub-lists, then sorting those
+    sub-lists as it reassembles them.
+    O(n log n)
+    """
+    # The base case: A list of size 1 or 0 is inherently sorted
+    if len(a) <= 1:
+        return a
+
+    # Break the list in half and sort each half
+    mid = len(a) // 2
+    left = merge_sort(a[:mid])
+    right = merge_sort(a[mid:])
+
+    # Merge the two sorted halves back together
+    merge_result = []
+    i = 0
+    j = 0
+    # Compare the elements of each half
+    while i < len(left) and j < len(right):
+        # Append the smaller one to the result
+        if left[i] <= right[j]:
+            merge_result.append(left[i])
+            i += 1
+        else:
+            merge_result.append(right[j])
+            j += 1
+
+    # Append any remaining elements from the left half
+    while i < len(left):
+        merge_result.append(left[i])
+        i += 1
+
+    # Append any remaining elements from the right half
+    while j < len(right):
+        merge_result.append(right[j])
+        j += 1
+
+    return merge_result
 
 
 def quick_sort(a: list):
