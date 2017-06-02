@@ -109,13 +109,16 @@ def shell_sort(a: list):
     return b
 
 
-def _shell_helper(a: list, start: int, gap: int):
+def _shell_helper(a: list, start: int, gap: int, end: int=None):
     """This function sorts every gap'th item of the list in place, by way of insertion sort.
     It is used for shell sort."""
 
+    if end is None:
+        end = len(a)
+
     # Assume the first item in the list is a sorted sub-list and loop through the rest
     # Treat the items at every gap'th index as if they were the entire list
-    for i in range(start + gap, len(a), gap):
+    for i in range(start + gap, end, gap):
         # Get the next item to be sorted
         to_sort = a[i]
         # Loop backwards through the items of the sorted sub-list
@@ -181,8 +184,14 @@ def _quick_helper(a: list, start: int, end: int):
 
         split = _quick_partition(a, start, end)
 
-        _quick_helper(a, start, split - 1)
-        _quick_helper(a, split + 1, end)
+        if (split - 1) - start < 10:
+            _shell_helper(a, start, 1, split)
+        else:
+            _quick_helper(a, start, split - 1)
+        if end - (split + 1) < 10:
+            _shell_helper(a, split + 1, 1, end + 1)
+        else:
+            _quick_helper(a, split + 1, end)
 
 
 def _quick_partition(a: list, start: int, end: int):

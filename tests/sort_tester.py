@@ -20,7 +20,7 @@ class SortTester(unittest.TestCase):
         self.ds = sorted(self.d)
         self.e = [3, 5, 3, 7, 4, 2, 3, 2, 6, 8, 5]
         self.es = sorted(self.e)
-        self.f = [random.randint(-1000, 1000) for _ in range(random.randint(990, 1010))]
+        self.f = [random.randint(-1000, 10000) for _ in range(10000)]
         self.fs = sorted(self.f)
         self.random = []
         for _ in range(200):
