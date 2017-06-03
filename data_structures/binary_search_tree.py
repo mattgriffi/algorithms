@@ -73,6 +73,9 @@ class BinarySearchTree:
     def __setitem__(self, key, value):
         self.put(key, value)
 
+    def __contains__(self, key):
+        return self.get(key) is not None
+
     def __len__(self):
         return self.size
 
