@@ -48,7 +48,8 @@ class BinarySearchTreeTester(unittest.TestCase):
         self.assertFalse(3 in self.bst)
         self.bst[3] = "a"
         self.assertTrue(3 in self.bst)
-
+        self.bst[2] = None
+        self.assertTrue(2 in self.bst)
 
     def assert_empty(self, bst):
         self.assertEqual(0, bst.length())
