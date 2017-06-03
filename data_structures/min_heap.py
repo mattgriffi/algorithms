@@ -14,16 +14,17 @@ class MinHeap:
 
     def find_min(self):
         """Returns the item with the minimum key value."""
-        if len(self.heap) == 1:
+        if self.current_size == 0:
             raise HeapException("cannot find min in an empty heap")
         return self.heap[1]
 
     def del_min(self):
         """Returns the item with the minimum key value and removes it from the heap."""
-        if len(self.heap) == 1:
+        if self.current_size == 0:
             raise HeapException("cannot del from an empty heap")
         min_item = self.heap[1]
-        self.heap[1] = self.heap.pop()
+        self.heap[1] = self.heap[-1]
+        self.heap.pop()
         self.current_size -= 1
         self.__percolate_down()
         return min_item
@@ -60,6 +61,9 @@ class MinHeap:
             p = min_child
 
     def __min_child(self, p):
+        """Returns the index of the smallest child of the given parent node. If parent node is
+        a leaf, returns the index of the left child slot. If parent node has only 1 child,
+        returns the index of the left child slot."""
         if p * 2 + 1 > self.current_size:
             return p * 2
         elif self.heap[p * 2] < self.heap[p * 2 + 1]:
