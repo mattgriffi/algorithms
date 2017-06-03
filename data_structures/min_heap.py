@@ -12,9 +12,18 @@ class MinHeap:
 
     def find_min(self):
         """Returns the item with the minimum key value."""
+        if len(self.heap) == 1:
+            raise HeapException("cannot find min in an empty heap")
+        return self.heap[1]
 
     def del_min(self):
         """Returns the item with the minimum key value and removes it from the heap."""
+        if len(self.heap) == 1:
+            raise HeapException("cannot del from an empty heap")
+        min_item = self.heap[1]
+        self.heap[1] = self.heap.pop()
+        self.__percolate_down()
+        return min_item
 
     def is_empty(self):
         """Returns True if the heap is empty, else False."""
@@ -36,5 +45,12 @@ class MinHeap:
             else:
                 break
 
+    def __percolate_down(self):
+        pass
+
     def __swap(self, x, y):
         self.heap[x], self.heap[y] = self.heap[y], self.heap[x]
+
+
+class HeapException(Exception):
+    pass
