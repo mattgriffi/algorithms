@@ -54,3 +54,12 @@ class Node:
         """Returns True if node has both a left and right child, else false."""
         return self.left is not None and self.right is not None
 
+    def replace_node_data(self, key, value, left_child, right_child):
+        self.key = key
+        self.value = value
+        self.left = left_child
+        self.right = right_child
+        if self.has_left_child():
+            self.left.parent = self
+        if self.has_right_child():
+            self.right.parent = self
