@@ -19,12 +19,20 @@ class BinarySearchTree:
 
 
 class Node:
-    def __init__(self, key, value, left=None, right=None, parent=None):
+    def __init__(self, key, value, left_child=None, right_child=None, parent=None):
         self.key = key
         self.value = value
-        self.left = left
-        self.right = right
+        self.left = left_child
+        self.right = right_child
         self.parent = parent
+
+    def has_left_child(self):
+        """Returns True if node has a left child, else False."""
+        return self.left is not None
+
+    def has_right_child(self):
+        """Returns True if node has a right child, else False."""
+        return self.right is not None
 
     def is_left_child(self):
         """Returns True if node is the left child of its parent, else False."""
