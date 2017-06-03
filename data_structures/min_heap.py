@@ -3,10 +3,12 @@
 
 class MinHeap:
     def __init__(self):
-        pass
+        self.heap = [0]
 
     def insert(self, k):
         """Adds new item k into the heap."""
+        self.heap.append(k)
+        self.__percolate_up()
 
     def find_min(self):
         """Returns the item with the minimum key value."""
@@ -22,3 +24,17 @@ class MinHeap:
 
     def build_heap(self, key_list: list):
         """Builds a new heap from the keys in the key_list."""
+
+    def __percolate_up(self):
+        """Takes the last item in the list and moves it up if needed."""
+        c = p = len(self.heap) - 1
+        while p > 1:
+            p //= 2
+            if self.heap[c] < self.heap[p]:
+                self.__swap(c, p)
+                c = p
+            else:
+                break
+
+    def __swap(self, x, y):
+        self.heap[x], self.heap[y] = self.heap[y], self.heap[x]
