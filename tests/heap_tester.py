@@ -29,6 +29,15 @@ class HeapTester(unittest.TestCase):
             sorted_list.append(min_item)
         self.assertTrue(sorted(sorted_list) == sorted_list)
 
+    def test_build_heap(self):
+        keys = [random.randint(-100, 100) for _ in range(100)]
+        self.h.build_heap(keys)
+        sorted_keys = []
+        while not self.h.is_empty():
+            self.check_min(self.h)
+            sorted_keys.append(self.h.del_min())
+        self.assertTrue(sorted(keys) == sorted_keys)
+
     def test_heap_fuzzer(self):
 
         for _ in range(20):
