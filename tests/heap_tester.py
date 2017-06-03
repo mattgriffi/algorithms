@@ -4,7 +4,7 @@
 import random
 import unittest
 
-from data_structures.min_heap import MinHeap, HeapException
+from data_structures.binary_heap import MinHeap, HeapException
 
 
 class HeapTester(unittest.TestCase):
