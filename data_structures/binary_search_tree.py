@@ -195,3 +195,44 @@ class Node:
             self.left.parent = self
         if self.has_right_child():
             self.right.parent = self
+
+    def find_min(self):
+        """Returns the node with the smallest key in the subtree of which this node is the
+        root."""
+        current = self
+        while current.has_left_child():
+            current = current.left
+        return current
+
+    def splice_out(self):
+        """Node removes itself from the tree."""
+        if self.is_leaf():
+            if self.is_left_child():
+                self.parent.left = None
+            else:
+                self.parent.right = None
+        else:
+            if self.has_left_child():
+                if self.is_left_child():
+                    self.parent.left = self.left
+                else:
+                    self.parent.right = self.left
+                self.left.parent = self.parent
+            else:
+                if self.is_left_child():
+                    self.parent.left = self.right
+                else:
+                    self.parent.right = self.right
+                self.right.parent = self.parent
+
+    def find_successor(self):
+        successor = None
+        if self.has_right_child():
+            successor = self.right.find_min()
+        elif self.is_left_child():
+            successor = self.parent
+        elif self.is_right_child():
+            self.parent.right = None
+            successor = self.parent.find_successor()
+            self.parent.right = self
+        return successor
