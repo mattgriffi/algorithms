@@ -1,4 +1,4 @@
-"""This class implements a binary search tree."""
+"""This class implements a binary search tree that stores key-value pairs, sorted by key."""
 
 
 class BinarySearchTree:
@@ -39,6 +39,30 @@ class BinarySearchTree:
             # If current node has no right child, create node
             else:
                 current_node.right = Node(key, value, parent=current_node)
+
+    def get(self, key):
+        if self.root is None:
+            return None
+        else:
+            search_node = self._get(key, self.root)
+            return search_node.value if search_node is not None else None
+
+    def _get(self, key, current_node):
+        if key == current_node.key:
+            return current_node
+        elif key < current_node.key:
+            if current_node.has_left_child():
+                return self._get(key, current_node.left)
+            else:
+                return None
+        else:
+            if current_node.has_right_child():
+                return self._get(key, current_node.right)
+            else:
+                return None
+
+    def __getitem__(self, key):
+        return self.get(key)
 
     def __setitem__(self, key, value):
         self.put(key, value)
