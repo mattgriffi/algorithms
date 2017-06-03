@@ -56,7 +56,7 @@ class MinHeap:
         p = 1
         while p * 2 <= self.current_size:
             min_child = self.__min_child(p)
-            if self.heap[p] < self.heap[min_child]:
+            if self.heap[p] > self.heap[min_child]:
                 self.__swap(p, min_child)
             p = min_child
 
