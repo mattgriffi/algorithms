@@ -41,6 +41,7 @@ class BinarySearchTree:
                 current_node.right = Node(key, value, parent=current_node)
 
     def get(self, key):
+        """Returns the value of key if it exists in the tree, else returns None."""
         if self.root is None:
             return None
         else:
@@ -48,13 +49,17 @@ class BinarySearchTree:
             return search_node.value if search_node is not None else None
 
     def _get(self, key, current_node):
+        """Recursively gets the node with key."""
+        # If current node matches the key, return it
         if key == current_node.key:
             return current_node
+        # Else if key is less than current node, recursively go left
         elif key < current_node.key:
             if current_node.has_left_child():
                 return self._get(key, current_node.left)
             else:
                 return None
+        # Else if key is greater than current node, recursively go right
         else:
             if current_node.has_right_child():
                 return self._get(key, current_node.right)
