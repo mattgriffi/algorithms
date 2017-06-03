@@ -41,6 +41,8 @@ class BinarySearchTreeTester(unittest.TestCase):
         self.assertEqual("c", self.bst[21])
         self.assertEqual("a", self.bst[5])
         self.assertIsNone(self.bst[3])
+        self.bst[2] = "e"
+        self.assertEqual("e", self.bst[2])
 
     def assert_empty(self, bst):
         self.assertEqual(0, bst.length())
