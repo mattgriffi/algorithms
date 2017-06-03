@@ -19,7 +19,7 @@ class BinarySearchTree:
             self._put(key, value, self.root)
         self.size += 1
 
-    def _put(self, key, value, current_node):
+    def _put(self, key, value, current_node: Node):
         """Recursively puts the key-value pair in the right place."""
         # If the key is already in the tree, change its value
         if key == current_node.key:
@@ -49,7 +49,7 @@ class BinarySearchTree:
             search_node = self._get(key, self.root)
             return search_node.value if search_node is not None else None
 
-    def _get(self, key, current_node):
+    def _get(self, key, current_node: Node):
         """Recursively gets the node with key."""
         # If current node matches the key, return it
         if key == current_node.key:
@@ -66,6 +66,71 @@ class BinarySearchTree:
                 return self._get(key, current_node.right)
             else:
                 return None
+
+    def delete(self, key):
+        """Deletes the node of the given key from the tree. Raises a KeyError if key is not in
+        the tree."""
+        # Root is None
+        if self.root is None:
+            raise KeyError("cannot delete from empty tree")
+        # Root is the only node and is the node to delete
+        elif self.size == 1 and self.root.key == key:
+            self.root = None
+        # There are multiple nodes in the tree
+        else:
+            node = self._get(key, self.root)
+            if node is None:
+                raise KeyError(f"key not in tree: {key}")
+            self._remove(node)
+
+        self.size -= 1
+
+    def _remove(self, node: Node):
+        """Removes the given node from the tree."""
+
+        # node is a leaf
+        if node.is_leaf():
+            if node.parent.left == node:
+                node.parent.left = None
+            else:
+                node.parent.right = None
+
+        # node has one child
+        elif not node.has_two_children():
+            # node is a left child
+            if node.is_left_child():
+                if node.has_left_child():
+                    node.parent.left = node.left
+                    node.left.parent = node.parent
+                else:
+                    node.parent.left = node.right
+                    node.right.parent = node.parent
+            # node is a right child:
+            elif node.is_right_child:
+                if node.has_left_child():
+                    node.parent.right = node.left
+                    node.left.parent = node.parent
+                else:
+                    node.parent.right = node.right
+                    node.right.parent = node.parent
+            # node is the root
+            else:
+                if node.has_left_child():
+                    self.root = self.root.left
+                    self.root.parent = None
+                else:
+                    self.root = self.root.right
+                    self.root.parent = None
+
+        # node has two children
+        else:
+            successor = node.find_successor()
+            successor.splice_out()
+            node.key = successor.key
+            node.value = successor.value
+
+    def __delitem__(self, key):
+        self.delete(key)
 
     def __getitem__(self, key):
         return self.get(key)
