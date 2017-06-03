@@ -17,6 +17,7 @@ class BinarySearchTree:
             self.root = Node(key, value)
         else:
             self._put(key, value, self.root)
+        self.size += 1
 
     def _put(self, key, value, current_node):
         """Recursively puts the key-value pair in the right place."""
