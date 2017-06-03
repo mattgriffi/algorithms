@@ -26,7 +26,7 @@ class MinHeap:
         self.heap[1] = self.heap[-1]
         self.heap.pop()
         self.current_size -= 1
-        self.__percolate_down()
+        self.__percolate_down(1)
         return min_item
 
     def is_empty(self):
@@ -39,6 +39,12 @@ class MinHeap:
 
     def build_heap(self, key_list: list):
         """Builds a new heap from the keys in the key_list."""
+        self.heap = [0] + key_list[:]
+        self.current_size = len(key_list)
+        i = self.current_size // 2
+        while i > 0:
+            self.__percolate_down(i)
+            i -= 1
 
     def __percolate_up(self):
         """Takes the last item in the list and moves it up if needed."""
@@ -51,14 +57,13 @@ class MinHeap:
             else:
                 break
 
-    def __percolate_down(self):
-        """Takes the first item in the list and moves down if needed."""
-        p = 1
-        while p * 2 <= self.current_size:
-            min_child = self.__min_child(p)
-            if self.heap[p] > self.heap[min_child]:
-                self.__swap(p, min_child)
-            p = min_child
+    def __percolate_down(self, i):
+        """Takes the given item in the list and moves down if needed."""
+        while i * 2 <= self.current_size:
+            min_child = self.__min_child(i)
+            if self.heap[i] > self.heap[min_child]:
+                self.__swap(i, min_child)
+            i = min_child
 
     def __min_child(self, p):
         """Returns the index of the smallest child of the given parent node. If parent node is
