@@ -40,6 +40,8 @@ class BinarySearchTree:
             else:
                 current_node.right = Node(key, value, parent=current_node)
 
+    def __setitem__(self, key, value):
+        self.put(key, value)
 
     def __len__(self):
         return self.size
