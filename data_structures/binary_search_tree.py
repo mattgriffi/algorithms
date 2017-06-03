@@ -74,7 +74,9 @@ class BinarySearchTree:
         self.put(key, value)
 
     def __contains__(self, key):
-        return self.get(key) is not None
+        if self.root is None:
+            return False
+        return self._get(key, self.root) is not None
 
     def __len__(self):
         return self.size
