@@ -14,7 +14,7 @@ def knight_graph(board_size):
             current_node_id = position_to_node_id(row, col, board_size)
             legal_move_positions = generate_legal_moves(row, col, board_size)
             for position in legal_move_positions:
-                legal_move_node_id = position_to_node_id(position[0], position[1], board_size)
+                legal_move_node_id = position_to_node_id(*position, board_size)
                 graph.add_edge(current_node_id, legal_move_node_id)
 
     return graph
