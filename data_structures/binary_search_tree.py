@@ -157,6 +157,7 @@ class Node:
         self.left = left_child
         self.right = right_child
         self.parent = parent
+        self.balance_factor = 0
 
     def has_left_child(self):
         """Returns True if node has a left child, else False."""
