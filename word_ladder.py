@@ -1,7 +1,7 @@
 """This program solves the classic word ladder problem using a Graph."""
 
 
-from data_structures.graph import Graph, Vertex
+from data_structures.graph import Graph
 from data_structures.queue import Queue
 
 
@@ -32,7 +32,6 @@ def build_graph(word_file):
 
 def breadth_first_search(graph, start):
 
-
     start.distance = 0
     start.predecessor = None
     vertex_queue = Queue()
@@ -48,3 +47,18 @@ def breadth_first_search(graph, start):
                 neighbor.predecessor = current_vertex
                 vertex_queue.enqueue(neighbor)
         current_vertex.color = "black"
+
+
+def traverse_bfs_tree(start):
+    current_vertex = start
+    while current_vertex.predecessor is not None:
+        print(current_vertex.id)
+        current_vertex = current_vertex.predecessor
+    print(current_vertex.id)
+
+
+graph = build_graph("words.txt")
+
+breadth_first_search(graph, graph.get_vertex("fool"))
+
+traverse_bfs_tree(graph.get_vertex("sage"))
