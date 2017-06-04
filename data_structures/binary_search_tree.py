@@ -36,7 +36,7 @@ class BinarySearchTree:
         else:
             # If current node has a right child, recursively move to that child
             if current_node.has_right_child():
-                self._put(key, value, current_node)
+                self._put(key, value, current_node.right)
             # If current node has no right child, create node
             else:
                 current_node.right = Node(key, value, parent=current_node)
