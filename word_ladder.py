@@ -1,7 +1,8 @@
 """This program solves the classic word ladder problem using a Graph."""
 
 
-from data_structures.graph import Graph
+from data_structures.graph import Graph, Vertex
+from data_structures.queue import Queue
 
 
 def build_graph(word_file):
@@ -27,3 +28,23 @@ def build_graph(word_file):
                     graph.add_edge(word1, word2)
 
     return graph
+
+
+def breadth_first_search(graph, start):
+
+
+    start.distance = 0
+    start.predecessor = None
+    vertex_queue = Queue()
+    vertex_queue.enqueue(start)
+
+    while not vertex_queue.isEmpty():
+        current_vertex = vertex_queue.dequeue()
+
+        for neighbor in current_vertex.get_connections():
+            if neighbor.color == "white":
+                neighbor.color = "gray"
+                neighbor.distance = current_vertex.distance + 1
+                neighbor.predecessor = current_vertex
+                vertex_queue.enqueue(neighbor)
+        current_vertex.color = "black"
