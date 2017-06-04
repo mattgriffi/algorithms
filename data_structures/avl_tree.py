@@ -92,3 +92,19 @@ class AVLTree(BinarySearchTree):
             new_root.balance_factor, 0)
         new_root.balance_factor = new_root.balance_factor + 1 + max(
             rotation_root.balance_factor, 0)
+
+    def rebalance(self, node):
+        # We need to do a left rotation
+        if node.balance_factor < 0:
+            if node.right.balance_factor > 0:
+                self.rotate_right(node.right)
+                self.rotate_left(node)
+            else:
+                self.rotate_left(node)
+        # We need to do a right rotation
+        elif node.balance_factor > 0:
+            if node.left.balance_factor < 0:
+                self.rotate_left(node.left)
+                self.rotate_right(node)
+            else:
+                self.rotate_right(node)
