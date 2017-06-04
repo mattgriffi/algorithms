@@ -236,3 +236,13 @@ class Node:
             successor = self.parent.find_successor()
             self.parent.right = self
         return successor
+
+    def __iter__(self):
+        if self:
+            if self.has_left_child():
+                for child in self.left:
+                    yield child
+            yield self.key
+            if self.has_right_child():
+                for child in self.right:
+                    yield child
