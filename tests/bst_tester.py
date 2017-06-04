@@ -51,6 +51,27 @@ class BinarySearchTreeTester(unittest.TestCase):
         self.bst[2] = None
         self.assertTrue(2 in self.bst)
 
+    def test_delete(self):
+        self.bst[99] = "a"
+        del self.bst[99]
+        self.bst[5] = "a"
+        self.bst[2] = "b"
+        self.bst[1] = "c"
+        self.bst[4] = "d"
+        self.assertEqual(4, self.bst.length())
+        self.assertIsNone(self.bst[99])
+        with self.assertRaises(KeyError):
+            del self.bst[99]
+
+        del self.bst[2]
+        with self.assertRaises(KeyError):
+            del self.bst[2]
+        self.assertEqual("c", self.bst[1])
+        self.assertEqual("d", self.bst[4])
+        del self.bst[5]
+        self.assertEqual("c", self.bst[1])
+        self.assertEqual("d", self.bst[4])
+
     def assert_empty(self, bst):
         self.assertEqual(0, bst.length())
         self.assertEqual(0, len(bst))
