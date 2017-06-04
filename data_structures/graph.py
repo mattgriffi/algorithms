@@ -2,7 +2,7 @@
 
 
 class Graph:
-    def __init(self):
+    def __init__(self):
         self.vertices = {}
         self.num_vertices = 0
 
@@ -15,7 +15,7 @@ class Graph:
 
     def get_vertex(self, key):
         """Returns vertex with id key if it exists the graph, else returns None."""
-        return self.vertices.get(key, default=None)
+        return self.vertices.get(key, None)
 
     def add_edge(self, from_vertex, to_vertex, weight=0):
         """Adds an edge between two vertices. Will create the vertices if they do not already
