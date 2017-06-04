@@ -42,6 +42,9 @@ class Vertex:
     def __init__(self, key):
         self.id = key
         self.connected_to = {}
+        self.color = "white"
+        self.distance = 0
+        self.predecessor = None
 
     def add_neighbor(self, neighbor, weight=0):
         """Creates a new edge from this vertex to the neighbor."""
