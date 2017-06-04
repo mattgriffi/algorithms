@@ -42,3 +42,53 @@ class AVLTree(BinarySearchTree):
             # If parent balance factor is now not 0, recursively update its balance
             if node.parent.balance_factor != 0:
                 self.update_balance(node.parent)
+
+    def rotate_left(self, rotation_root):
+
+        new_root = rotation_root.right
+        rotation_root.right = new_root.left
+
+        if new_root.left is not None:
+            new_root.left.parent = rotation_root
+
+        new_root.parent = rotation_root.parent
+
+        if rotation_root.is_root():
+            self.root = new_root
+        elif rotation_root.is_left_child():
+            rotation_root.parent.left = new_root
+        else:
+            rotation_root.parent.right = new_root
+
+        new_root.left = rotation_root
+        rotation_root.parent = new_root
+
+        rotation_root.balance_factor = rotation_root.balance_factor + 1 - min(
+            new_root.balance_factor, 0)
+        new_root.balance_factor = new_root.balance_factor + 1 + max(
+            rotation_root.balance_factor, 0)
+
+    def rotate_right(self, rotation_root):
+
+        new_root = rotation_root.left
+        rotation_root.left = new_root.right
+
+        if new_root.right is not None:
+            new_root.right.parent = rotation_root
+
+        new_root.parent = rotation_root.parent
+
+        if rotation_root.is_root():
+            self.root = new_root
+        elif rotation_root.is_left_child():
+            rotation_root.parent.left = new_root
+        else:
+            rotation_root.parent.right = new_root
+
+        new_root.right = rotation_root
+        rotation_root.parent = new_root
+
+        rotation_root.balance_factor = rotation_root.balance_factor + 1 - min(
+            new_root.balance_factor, 0)
+        new_root.balance_factor = new_root.balance_factor + 1 + max(
+            rotation_root.balance_factor, 0)
