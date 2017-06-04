@@ -19,7 +19,7 @@ class BinarySearchTree:
             self._put(key, value, self.root)
         self.size += 1
 
-    def _put(self, key, value, current_node: Node):
+    def _put(self, key, value, current_node):
         """Recursively puts the key-value pair in the right place."""
         # If the key is already in the tree, change its value
         if key == current_node.key:
@@ -49,7 +49,7 @@ class BinarySearchTree:
             search_node = self._get(key, self.root)
             return search_node.value if search_node is not None else None
 
-    def _get(self, key, current_node: Node):
+    def _get(self, key, current_node):
         """Recursively gets the node with key."""
         # If current node matches the key, return it
         if key == current_node.key:
@@ -85,7 +85,7 @@ class BinarySearchTree:
 
         self.size -= 1
 
-    def _remove(self, node: Node):
+    def _remove(self, node):
         """Removes the given node from the tree."""
 
         # node is a leaf
@@ -106,7 +106,7 @@ class BinarySearchTree:
                     node.parent.left = node.right
                     node.right.parent = node.parent
             # node is a right child:
-            elif node.is_right_child:
+            elif node.is_right_child():
                 if node.has_left_child():
                     node.parent.right = node.left
                     node.left.parent = node.parent
