@@ -53,24 +53,35 @@ class BinarySearchTreeTester(unittest.TestCase):
 
     def test_delete(self):
         self.bst[99] = "a"
+        # Try to delete a node
         del self.bst[99]
+        self.assert_empty(self.bst)
         self.bst[5] = "a"
         self.bst[2] = "b"
         self.bst[1] = "c"
         self.bst[4] = "d"
-        self.assertEqual(4, self.bst.length())
+        self.bst[7] = "e"
+        # Make sure the length is correct after that last deletion
+        self.assertEqual(5, self.bst.length())
+        # Make sure the deleted node is actually gone
         self.assertIsNone(self.bst[99])
+        # Make sure we can't delete the same node twice
         with self.assertRaises(KeyError):
             del self.bst[99]
-
+        # Try to delete a node with two children
         del self.bst[2]
+        # Make sure it was actually deleted
         with self.assertRaises(KeyError):
             del self.bst[2]
+        # Make sure neither of its children were lost
         self.assertEqual("c", self.bst[1])
         self.assertEqual("d", self.bst[4])
+        # Try to delete the root
         del self.bst[5]
+        # Make sure all the other nodes are still there
         self.assertEqual("c", self.bst[1])
         self.assertEqual("d", self.bst[4])
+        self.assertEqual("e", self.bst[7])
 
     def assert_empty(self, bst):
         self.assertEqual(0, bst.length())
