@@ -45,7 +45,7 @@ class Vertex:
         self.color = "white"
         self.distance = 0
         self.predecessor = None
-        self.discovery_time
+        self.discovery_time = 0
 
     def add_neighbor(self, neighbor, weight=0):
         """Creates a new edge from this vertex to the neighbor."""
