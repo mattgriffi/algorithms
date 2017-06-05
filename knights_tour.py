@@ -44,3 +44,32 @@ def generate_legal_moves(x, y, board_size):
 def legal_coord(x, y, board_size):
     """Returns True if the given coordinate is on the board, else False."""
     return 0 <= x < board_size and 0 <= y < board_size
+
+
+def knight_tour(current_depth, path, current_vertex, limit):
+    """Uses depth first search to find the path a knight can take from a given starting node
+    such that it visits every square on a chess board."""
+    # Mark the vertex gray to show we've already been here
+    current_vertex.color = "gray"
+    path.append(current_vertex)
+    # If we haven't already visited the required number of vertices
+    if current_depth < limit:
+        # Get all the neighbors of the current vertex
+        neighbor_list = current_vertex.get_connections()
+        done = False
+        for neighbor in neighbor_list:
+            # If a neighbor is unvisited (white)
+            if neighbor.color == "white":
+                # Recursively search from that vertex
+                done = knight_tour(current_depth+1, path, neighbor, limit)
+            if done:
+                break
+        # If we tried every neighbor and didn't find a valid path, backtrack
+        if not done:
+            path.pop()
+            current_vertex.color = "white"
+    # If we visited the required number of nodes, we were successful!
+    else:
+        done = True
+    # done will be False if we hit a dead end, or True if we found a valid path
+    return done
