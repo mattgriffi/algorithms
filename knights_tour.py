@@ -67,7 +67,7 @@ def knight_tour(current_depth, path, current_vertex, limit):
     # If we haven't already visited the required number of vertices
     if current_depth < limit:
         # Get all the neighbors of the current vertex
-        neighbor_list = current_vertex.get_connections()
+        neighbor_list = get_neighbors(current_vertex)
         done = False
         for neighbor in neighbor_list:
             # If a neighbor is unvisited (white)
@@ -85,6 +85,27 @@ def knight_tour(current_depth, path, current_vertex, limit):
         done = True
     # done will be False if we hit a dead end, or True if we found a valid path
     return done
+
+
+def get_neighbors(vertex):
+    """Returns a list of the vertices connected to the given vertex, ordered in ascending order
+    by the number of connections each has to other unvisited vertices. With this, the knight
+    will be inclined to visit the edges of the board first, and saves the middle of the board
+    for later. Credit to H. C. Warnsdorff"""
+    vertex_list = []
+    # For each neighbor of the given vertex
+    for neighbor in vertex.get_connections():
+        # If the neighbor is unvisited
+        if neighbor.color == "white":
+            connections = 0
+            # Count the number of unvisited connections that neighbor has
+            for neighbor_of_neighbor in neighbor.get_connections():
+                if neighbor_of_neighbor.color == "white":
+                    connections += 1
+            vertex_list.append((connections, neighbor))
+    # Sort in ascending order by number of connections
+    vertex_list.sort(key=lambda x: x[0])
+    return [vertex[1] for vertex in vertex_list]
 
 
 if __name__ == "__main__":
