@@ -43,7 +43,7 @@ class Vertex:
         self.id = key
         self.connected_to = {}
         self.color = "white"
-        self.distance = 0
+        self.distance = 2_000_000_000
         self.predecessor = None
         self.discovery_time = 0
         self.finish_time = 0
