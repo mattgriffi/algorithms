@@ -1,7 +1,19 @@
 """This program solves the Knight's Tour chess puzzle with a depth first search on a Graph."""
 
+import time
 
 from data_structures.graph import Graph
+
+
+def main():
+    board_size = 8
+    starting_square = 0
+    board = knight_graph(board_size)
+    knight_path = []
+    start = time.time()
+    knight_tour(0, knight_path, board.get_vertex(starting_square), 63)
+    print(f"Our brave knight took {time.time()-start:.10f} seconds to complete his journey.")
+    print([vertex.id for vertex in knight_path])
 
 
 def knight_graph(board_size):
@@ -61,7 +73,7 @@ def knight_tour(current_depth, path, current_vertex, limit):
             # If a neighbor is unvisited (white)
             if neighbor.color == "white":
                 # Recursively search from that vertex
-                done = knight_tour(current_depth+1, path, neighbor, limit)
+                done = knight_tour(current_depth + 1, path, neighbor, limit)
             if done:
                 break
         # If we tried every neighbor and didn't find a valid path, backtrack
@@ -73,3 +85,7 @@ def knight_tour(current_depth, path, current_vertex, limit):
         done = True
     # done will be False if we hit a dead end, or True if we found a valid path
     return done
+
+
+if __name__ == "__main__":
+    main()
