@@ -2,8 +2,8 @@ import time
 
 
 def main():
-    string_A = 'bb'
-    string_B = 'bb'
+    string_A = 'Carthorse'
+    string_B = 'Orchestra'
 
     def R(idx_a, idx_b, cache={}):
         if (idx_a, idx_b) in cache:
@@ -13,9 +13,9 @@ def main():
             idx_a, idx_b = idx_a - 1, idx_b - 1
 
         if idx_a < 0:
-            cache[(idx_a, idx_b)] = idx_b + 1
+            return idx_b + 1
         elif idx_b < 0:
-            cache[(idx_a, idx_b)] = idx_a + 1
+            return idx_a + 1
         else:
             cache[(idx_a, idx_b)] = 1 + \
                 min(R(idx_a, idx_b - 1), R(idx_a - 1, idx_b - 1), R(idx_a - 1, idx_b))
